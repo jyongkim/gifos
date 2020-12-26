@@ -1,0 +1,104 @@
+/* Mobile first */
+
+    /* Mode */
+        #mode {
+            display: none;
+        }
+
+        #mode[type="checkbox"]:checked ~ nav,
+        #mode[type="checkbox"]:checked ~ nav a {
+            color: #ccc;
+            background-color: #333;
+        }
+
+        /* Mode name */
+        #mode[type="checkbox"]:checked ~ nav li:first-child label::after {
+            content: " nocturno";
+        }
+
+    /* Navigation */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem;
+        }
+        .menu {
+            width: 100%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .menu a {
+            text-decoration: none;
+            display: block;
+            padding: .5rem;
+        }
+
+        .menu a::after {
+            content: "";
+            width: 3rem;
+            height: 1px;
+            background-color: black;
+            display: block;
+            margin: 1rem auto;
+        }
+
+        .menu li:first-child label::after {
+            content: " diurno";
+        }
+
+        .menu li:last-child a {
+            display: none;
+        }
+
+    /* Trending */
+
+        
+        main > section:last-child{
+            text-align: center;
+        }
+
+        main > section:last-child img{
+            width: 300px;
+            height: 200px;
+            margin: .5rem;
+        }
+
+        .trend {
+            max-height: 220px;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Hidde the scrollbar*/
+        ::-webkit-scrollbar {
+            height: 0;
+        }
+
+
+/* Tablet */
+        @media screen and (min-width:768px) {
+
+            /* Navigation */
+                nav button {
+                    display: none;
+                }
+
+                .menu {
+                    display: flex;
+                    width: auto;
+                }
+
+                .menu a::after {
+                    background-color: transparent;
+                    margin: .2rem;
+                }
+
+                .menu li:last-child a {
+                    display: block;
+                }
+        }
