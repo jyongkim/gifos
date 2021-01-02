@@ -1,32 +1,32 @@
-//	URLs Conexion
+//	URLs Conexión.
     const searchURL	= 'https://api.giphy.com/v1/gifs/search';
     const tagsURL	= 'https://api.giphy.com/v1/tags/related/'
     const trendURL 	= 'https://api.giphy.com/v1/gifs/trending';
     const uploadURL = 'https://upload.giphy.com/v1/gifs';
 
-// Parámetros de Giphy
+// Parámetros de Giphy.
     var apiKey = 'fpBZRb3C0HvYFqFbRomc6lxA2SUObxu7';
     var trendCount = 3;
     var url = `${trendURL}?api_key=${apiKey}&limit=${trendCount}&rating=g`;
 
-// Elementos del formulario
+// Elementos del formulario.
     const searchInput = document.querySelector('#header input');
     const searchSelect = document.querySelector('#header select');
     const searchForm = document.querySelector('#header form');
     
-// Áreas de la página
+// Áreas de la página.
     const results = document.querySelector('#results')
 
-/* Área de búsqueda */
-    // Autocompletado
-        // Escuchador de eventos
+/* Área de búsqueda. */
+    // Autocompletado.
+        // Escuchador de eventos.
             searchInput.addEventListener('input', () => {
                 if(searchInput.checkValidity()) {
                     searchWord = searchInput.value;
                     url = `${tagsURL}${searchWord}?api_key=${apiKey}&lang=es`;
                     searchSelect.innerHTML = '';
 
-                // Consulta API
+                // Consulta a API.
                     fetch(url).then(result => result.json()
                         .then(items => items.data.forEach(
                             item => { item != '' ? 
@@ -34,7 +34,7 @@
                                 null
             }   )   )   )   }   }   )
 
-        //Selección de sugerencia
+        //Selección de sugerencia.
             searchSelect.addEventListener(
                 'click', () => {
                     searchInput.value = searchSelect.value;
@@ -42,7 +42,7 @@
                 }
             )
         
-        // Envío del formulario
+        // Envío del formulario.
             searchForm.addEventListener(
                 'submit', (e) => {
                     e.preventDefault();
@@ -55,7 +55,7 @@
                 }
             )
         
-        // Función de consulta
+        // Función de la consulta.
             async function fetchGiphy(url, edit, build) {
                 await fetch(url).then(result => result.json())
                     .then(items => items.data.forEach(
@@ -63,7 +63,7 @@
                     ))
             }
         
-        // Área de resultados
+        // Área de resultados.
             function resultArea(item) {
                 return(
                     `<article>
@@ -80,6 +80,7 @@
             }
     
 
+/* Manera larga del fetch*/
 // window.addEventListener(
 //                     //Solicitar  =>   Manipulación datos => Interpretación
 //     'load', () => fetch(url).then( respuesta => respuesta.json().then(gif => {

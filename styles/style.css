@@ -1,206 +1,204 @@
 /* Mobile first */
-    *{
-        box-sizing: border-box;
-    }
-    body {
-        margin: 0;
-    }
-    :root {
-        --color: #572EE5;
-        --light: #AAA;
-    }
-    /* Mode */
-        #mode {
-            display: none;
-        }
+*{
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+:root {
+    --color: #572EE5;
+    --light: #AAA;
+}
+/* Mode */
+#mode {
+    display: none;
+}
 
-        #mode[type="checkbox"]:checked ~ nav,
-        #mode[type="checkbox"]:checked ~ nav a,
-        #mode[type="checkbox"]:checked ~ main,
-        #mode[type="checkbox"]:checked ~ header {
-            color: #ccc;
-            background-color: #333;
-        }
+#mode[type="checkbox"]:checked ~ nav,
+#mode[type="checkbox"]:checked ~ nav a,
+#mode[type="checkbox"]:checked ~ main,
+#mode[type="checkbox"]:checked ~ header {
+    color: #ccc;
+    background-color: #333;
+}
 
-        /* Mode name */
-        #mode[type="checkbox"]:checked ~ nav li:first-child label::after {
-            content: " nocturno";
-        }
+/* Mode name */
+#mode[type="checkbox"]:checked ~ nav li:first-child label::after {
+    content: " nocturno";
+}
 
-    /* Navigation */
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            padding: .5rem;
-        }
-        .menu {
-            width: 100%;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        .menu a {
-            text-decoration: none;
-            display: block;
-            padding: .5rem;
-        }
+/* Navigation */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+}
+.menu {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.menu a {
+    text-decoration: none;
+    display: block;
+    padding: .5rem;
+}
 
-        .menu a::after {
-            content: "";
-            width: 3rem;
-            height: 1px;
-            background-color: black;
-            display: block;
-            margin: 1rem auto;
-        }
+.menu a::after {
+    content: "";
+    width: 3rem;
+    height: 1px;
+    background-color: black;
+    display: block;
+    margin: 1rem auto;
+}
 
-        .menu li:first-child label::after {
-            content: " diurno";
-        }
+.menu li:first-child label::after {
+    content: " diurno";
+}
 
-        .menu li:last-child a {
-            display: none;
-        }
+.menu li:last-child a {
+    display: none;
+}
 
-    /* Área de búsqueda */
-        #header form {
-            display: flex;
-            flex-direction: column;
-            max-width: 576px;
-            margin: auto;
-        }
-        #header input {
-            border: 2px solid var(--color);
-            border-radius: 1rem;
-            padding: .5rem 1rem;
-        }
+/* Área de búsqueda */
+#header form {
+    display: flex;
+    flex-direction: column;
+    max-width: 576px;
+    margin: auto;
+}
+#header input {
+    border: 2px solid var(--color);
+    border-radius: 1rem;
+    padding: .5rem 1rem;
+}
 
-        #header select {
-            height: 0;
-            border:none;
-            border-radius: 0 0 1rem 1rem;
-            padding: 0;
-        }
+#header select {
+    height: 0;
+    border:none;
+    border-radius: 0 0 1rem 1rem;
+    padding: 0;
+}
 
-        #header input, #header select {
-            outline: none;
-            position: relative;
-        }
+#header input, #header select {
+    outline: none;
+    position: relative;
+}
 
-        #header input:valid:focus {
-            border-radius: 1rem 1rem 0 0;
-            border: 2px solid var(--color);
-            border-bottom: transparent;
-        }
+#header input:valid:focus {
+    border-radius: 1rem 1rem 0 0;
+    border: 2px solid var(--color);
+    border-bottom: transparent;
+}
 
-        #header input:valid:focus ~ select,
-        #header input:valid ~ select:hover {
-            height: auto;
-            padding:0;
-            border: 2px solid var(--color);
-            border-top: none;
-        }
+#header input:valid:focus ~ select,
+#header input:valid ~ select:hover {
+    height: auto;
+    padding:0;
+    border: 2px solid var(--color);
+    border-top: none;
+}
 
-        #header input:valid:focus ~ select option {
-            color: var(--light);
-            padding: .25rem 1rem;
-        }
+#header input:valid:focus ~ select option {
+    color: var(--light);
+    padding: .25rem 1rem;
+}
 
-        #header input:valid:focus ~ select::before {
-            content: '';
-            display: block;
-            top: 0;
-            width: 90%;
-            height: 1px;
-            background-color: var(--light);
-            margin: auto;
-        }
+#header input:valid:focus ~ select::before {
+    content: '';
+    display: block;
+    top: 0;
+    width: 90%;
+    height: 1px;
+    background-color: var(--light);
+    margin: auto;
+}
 
-    /* Contenido principal */
-        #header, main {
-            padding: 1rem;
-        }
+/* Contenido principal */
+#header, main {
+    padding: 1rem;
+}
 
-    /* Trending */
+/* Trending */
+main > section:last-child{
+    text-align: center;
+}
 
-        
-        main > section:last-child{
-            text-align: center;
-        }
+main > section:last-child img{
+    width: 300px;
+    height: 200px;
+    margin: .5rem;
+}
 
-        main > section:last-child img{
-            width: 300px;
-            height: 200px;
-            margin: .5rem;
-        }
+.trend {
+    max-height: 220px;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+}
 
-        .trend {
-            max-height: 220px;
-            overflow: auto;
-            display: flex;
-            justify-content: center;
-        }
+/* Hidde the scrollbar*/
+::-webkit-scrollbar {
+    height: 0;
+}
+#results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: .5rem;
+}
+article{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
 
-        /* Hidde the scrollbar*/
-        ::-webkit-scrollbar {
-            height: 0;
-        }
-        #results {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-            gap: .5rem;
-        }
-        article{
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+article:hover .hidden{
+    top: 0;
+    bottom: 0;
+    background-color: #572EE588;
+    color: #FEFEFE;
+}
 
-        article:hover .hidden{
-            top: 0;
-            bottom: 0;
-            background-color: #572EE588;
-            color: #FEFEFE;
-        }
+section img{
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+}
 
-        section img{
-            width: 100%;
-            height: 100%;
-            max-height: 200px;
-        }
-
-        .hidden {
-            position: absolute;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            bottom: 100%;
-        }
+.hidden {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    bottom: 100%;
+}
 
 /* Tablet */
-        @media screen and (min-width:768px) {
+@media screen and (min-width:768px) {
 
-            /* Navigation */
-                nav button {
-                    display: none;
-                }
+/* Navigation */
+    nav button {
+        display: none;
+    }
 
-                .menu {
-                    display: flex;
-                    width: auto;
-                }
+    .menu {
+        display: flex;
+        width: auto;
+    }
 
-                .menu a::after {
-                    background-color: transparent;
-                    margin: .2rem;
-                }
+    .menu a::after {
+        background-color: transparent;
+        margin: .2rem;
+    }
 
-                .menu li:last-child a {
-                    display: block;
-                }
-        }
+    .menu li:last-child a {
+        display: block;
+    }
+}
