@@ -1,12 +1,23 @@
 /* Mobile first */
-
+    *{
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+    }
+    :root {
+        --color: #572EE5;
+        --light: #AAA;
+    }
     /* Mode */
         #mode {
             display: none;
         }
 
         #mode[type="checkbox"]:checked ~ nav,
-        #mode[type="checkbox"]:checked ~ nav a {
+        #mode[type="checkbox"]:checked ~ nav a,
+        #mode[type="checkbox"]:checked ~ main,
+        #mode[type="checkbox"]:checked ~ header {
             color: #ccc;
             background-color: #333;
         }
@@ -54,6 +65,65 @@
             display: none;
         }
 
+    /* Área de búsqueda */
+        #header form {
+            display: flex;
+            flex-direction: column;
+            max-width: 576px;
+            margin: auto;
+        }
+        #header input {
+            border: 2px solid var(--color);
+            border-radius: 1rem;
+            padding: .5rem 1rem;
+        }
+
+        #header select {
+            height: 0;
+            border:none;
+            border-radius: 0 0 1rem 1rem;
+            padding: 0;
+        }
+
+        #header input, #header select {
+            outline: none;
+            position: relative;
+        }
+
+        #header input:valid:focus {
+            border-radius: 1rem 1rem 0 0;
+            border: 2px solid var(--color);
+            border-bottom: transparent;
+        }
+
+        #header input:valid:focus ~ select,
+        #header input:valid ~ select:hover {
+            height: auto;
+            padding:0;
+            border: 2px solid var(--color);
+            border-top: none;
+        }
+
+        #header input:valid:focus ~ select option {
+            color: var(--light);
+            padding: .25rem 1rem;
+        }
+
+        #header input:valid:focus ~ select::before {
+            content: '';
+            display: block;
+            top: 0;
+            width: 90%;
+            height: 1px;
+            background-color: var(--light);
+            margin: auto;
+        }
+
+    /* Contenido principal */
+        #header, main {
+            padding: 1rem;
+        }
+
     /* Trending */
 
         
@@ -78,7 +148,39 @@
         ::-webkit-scrollbar {
             height: 0;
         }
+        #results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+            gap: .5rem;
+        }
+        article{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
 
+        article:hover .hidden{
+            top: 0;
+            bottom: 0;
+            background-color: #572EE588;
+            color: #FEFEFE;
+        }
+
+        section img{
+            width: 100%;
+            height: 100%;
+            max-height: 200px;
+        }
+
+        .hidden {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            bottom: 100%;
+        }
 
 /* Tablet */
         @media screen and (min-width:768px) {
