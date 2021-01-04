@@ -1,3 +1,4 @@
+/*Constantes y variables */
 //	URLs Conexión.
     const searchURL	= 'https://api.giphy.com/v1/gifs/search';
     const tagsURL	= 'https://api.giphy.com/v1/tags/related/'
