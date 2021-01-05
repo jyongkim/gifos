@@ -1,54 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/style.css">
-    <title>Gifos</title>
+	<meta charset="UTF-8">
+	<meta 
+		name="viewport" 
+		content="width=device-width,
+				 initial-scale=1,
+				 maximum-scale=3">
+	<title>Gifos</title>
+	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <input type="checkbox" id="mode">
+	<input id="mode" type="checkbox" />
 <!-- Navigation -->
-    <nav>
-        <a href="">GIFOS</a>
-        <button>&equiv;</button>
-        <ul class="menu">
-            <li><a href=""> <label for="mode">Modo</label></a></li>
-            <li><a href="">Favoritos</a></li>
-            <li><a href="">Mis Gifos</a></li>
-            <li><a href="">+</a></li>
-        </ul>
-    </nav>
+	<nav>
+		<a class="icon logo" href="#"></a>
+		<button id="menu" class="icon">
+			&equiv;
+		</button>
+		<ul class="menu">
+			<li><a><label for="mode">Modo </label></a></li>
+			<li><a href="#favoritos">Favoritos</a></li>
+			<li><a href="#mis_gifos">Mis GIFOS</a></li>
+			<li><a href="#createGif"> + </a></li>
+		</ul>
+	</nav>
 <!-- Header -->
-    <header id="header">
-        <h1>Inspírate, busca, guarda y crea los mejores <span>GIFOS</span></h1>
-        <form>
-            <img src="assets\icons\ilustra_header.svg" alt="Logo Gifos">
-            <input 
-                type="search" 
-                minlength="2"
-                maxlength="50">
-            <select multiple></select>
-        </form>
-        <p>
-            <strong>Trending: </strong> Reactions, Entertainment, Sports, Stickers, Artists
-        </p>
-    </header>
+	<header id="header" >
+		<h1>Inspírate, busca, guarda, y crea los mejores 
+			<span class="special"> GIFOS </span>
+		</h1>
+		<img src="assets/icons/ilustra_header.svg" alt="ilustra_header">
+		<form id="search">
+			<input 
+				id="textField"
+				name="textField" 
+				type="search" 
+				list="suggestion" 
+				minlength="1"
+				maxlength="50" 
+				autocomplete="off" 
+				required>
+			<label for="textField">Buscar GIFOS y más</label>
+			<select id="suggestion" multiple>
+			</select>
+			<button class="icon search"></button>
+		</form>
+		<p>
+			<strong>Trending: </strong>
+			Reactions, Entertainment, Sports, Stickers, Artist
+		</p>
+	</header>
 <!-- Main content -->
-<main>
-    <section id="results">1</section>
-    <section>2</section>
-    <section>3</section>
-    <section>
-        <h1>Trending Gifos</h1>
-        <p>Mirá los últimos Gifos de nuestra comunidad</p>
-        <div class="trend">
-        </div>
-    </section>
-</main>
+	<main>
+		<section>
+			<h1 class="title"></h1>
+			<div id="results">
+			</div>
+			<form id="pagination">
+			</form>
+		</section>
+				<section id="createGif">
+			<article>
+				<div class="camera">
+				</div>
+				<video class="show"></video>
+				<img />
+			</article>
+			<div>
+				<ul class="menu">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<a href="#createGif"></a>
+					<div class="tape"></div>
+				</ul>
+				<button class="button">Crear</button>
+			</div>
+		</section>
+		<section>
+			<h1>Trending GIFOS</h1>
+			<p>	Mira los últimos GIFOS de nuestra comunidad. </p>
+			<div id="trending">
+			</div>
+		</section>
+	</main>
 <!-- Footer -->
-<footer>
-</footer>
-<script src="/scripts/script.js"></script>
+	<footer id="footer" >
+		<div class="social">
+			<p>Compartir en:</p>
+			<a class="icon facebook" href="https://facebook.com" target="_blank"></a>
+			<a class="icon twitter" href="https://twitter.com" target="_blank"></a>
+			<a class="icon instagram" href="https://instagram.com" target="_blank"></a>
+		</div>
+		<address>
+			&copy;<a href="#">GIFOS 2020 </a>
+			All Rights Reserved.
+		</address>
+	</footer>
+	<script src="scripts/main.js"></script>
+	<script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
 </body>
 </html>
