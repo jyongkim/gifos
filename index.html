@@ -12,7 +12,6 @@
 </head>
 <body>
 	<input id="mode" type="checkbox" />
-<!-- Navigation -->
 	<nav>
 		<a class="icon logo" href="#"></a>
 		<button id="menu" class="icon">
@@ -22,10 +21,9 @@
 			<li><a><label for="mode">Modo </label></a></li>
 			<li><a href="#favoritos">Favoritos</a></li>
 			<li><a href="#mis_gifos">Mis GIFOS</a></li>
-			<li><a href="#createGif"> + </a></li>
+			<li><a href="#crear_gifo"> + </a></li>
 		</ul>
 	</nav>
-<!-- Header -->
 	<header id="header" >
 		<h1>Inspírate, busca, guarda, y crea los mejores 
 			<span class="special"> GIFOS </span>
@@ -41,7 +39,7 @@
 				maxlength="50" 
 				autocomplete="off" 
 				required>
-			<label for="textField">Buscar GIFOS y más</label>
+			<label for="textField">Buscar GIFOS y mas</label>
 			<select id="suggestion" multiple>
 			</select>
 			<button class="icon search"></button>
@@ -51,16 +49,15 @@
 			Reactions, Entertainment, Sports, Stickers, Artist
 		</p>
 	</header>
-<!-- Main content -->
 	<main>
-		<section>
+		<section id="search">
 			<h1 class="title"></h1>
 			<div id="results">
 			</div>
 			<form id="pagination">
 			</form>
 		</section>
-				<section id="createGif">
+		<section id="crear_gifo">
 			<article>
 				<div class="camera">
 				</div>
@@ -72,20 +69,28 @@
 					<li>1</li>
 					<li>2</li>
 					<li>3</li>
-					<a href="#createGif"></a>
+					<a href="#crear_gifo"></a>
 					<div class="tape"></div>
 				</ul>
 				<button class="button">Crear</button>
 			</div>
 		</section>
-		<section>
-			<h1>Trending GIFOS</h1>
-			<p>	Mira los últimos GIFOS de nuestra comunidad. </p>
-			<div id="trending">
+		<section id="favoritos">
+			<h1>
+				<img src="assets/icons/section_favs.svg">
+				Favoritos
+			</h1>
+			<div>
+			</div>
+			<div class="noItems">
 			</div>
 		</section>
+		<section id="#">
+			<h1>Trending GIFOS</h1>
+			<p>	Mira los ultimos GIFOS de nuestra comunidad. </p>
+			<div id="trending"></div>
+		</section>
 	</main>
-<!-- Footer -->
 	<footer id="footer" >
 		<div class="social">
 			<p>Compartir en:</p>
