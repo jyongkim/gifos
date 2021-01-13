@@ -30,7 +30,7 @@ $icons: logo, search, link, fav, trash, max, close, download, facebook, instagra
 .notFound
 	margin: 0 auto 5rem
 
-/*Content First*/
+/*Content first*/
 *
 	box-sizing: border-box
 	font-family: century gothic, sans-serif
@@ -85,7 +85,7 @@ body
 	border-radius: 1rem
 	background: radial-gradient( ellipse at bottom right, darken($bg_color, 20%), $bg_color)
 
-/*Navigation Bar*/
+/*Navigation bar*/
 nav
 	+mode
 	+normalize($p: .5rem 0)
@@ -114,7 +114,8 @@ nav
 		+normalize($p:0)
 		line-height: 1.5rem
 		font-size: 2rem
-	/*Main Menu*/
+	
+	/*Main menu*/
 	.menu
 		+normalize
 		overflow: hidden
@@ -158,3 +159,143 @@ nav
 					background-color: $bg_color
 					@media screen and (min-width: $md)
 						display: none
+			
+			/*Light mode / Dark mode */
+			&:first-child
+				label
+					cursor: pointer
+					background-color: transparent
+					&:after
+						content:' Diurno'
+			/*Create GIFO*/
+			&:last-child
+				a
+					+normalize($p: .25rem)
+					display: none
+					border-radius: 50%
+					width: 2.25rem
+					font-size: 1.5rem
+					text-align: center
+					@media screen and (min-width: $md)
+						display: block
+						&:hover
+							+mode($bg_color, $color)
+				&.active
+					a
+						+mode($bg_color,darken($bg_color, 20%))
+	/*Dropdown menu*/
+	.open
+		display: block
+		opacity: .8
+		@media screen and (min-width: $md)
+			display: flex
+			padding: 0
+
+/*Header*/
+#header	
+	+mode
+	+normalize($p: 0)
+	text-align: center
+	h1
+		+normalize(auto, none, .2rem 3rem)
+		max-width: $sm
+	img 
+		+normalize(auto, none, 0 1rem)
+		display: block
+		width: 100%
+		//Para que la imagen ocupe un 75% de lo que mida el tamaño máximo de la medida SM
+		max-width: $sm * 3/4
+	/*Search form*/
+	form
+		position: sticky
+		top: 0
+		+normalize(auto, none, 0 1rem)
+		display: flex
+		flex-direction: column
+		position: relative
+		max-width: $sm
+		/*Search input*/
+		input
+			+normalize(0, 2px solid $color, .5rem)
+			outline: none
+			border-radius: 1rem 1rem 0 0
+			border-bottom: none
+			width: 100%
+			&:invalid
+				padding: 0 1rem
+				& ~ #suggestion option
+					display: none
+				& ~ label
+					display: block
+			/*Suggestions display*/
+			&:focus,
+			&:valid
+				+normalize(0, 2px solid $color, .5rem .25rem .5rem 3rem)
+				border-radius: 1rem 1rem 0 0
+				border-bottom: none
+				& ~ #suggestion
+					overflow: auto
+					height: auto
+					padding: 0 .5rem .5rem
+					&:before
+						width: 90%
+						height: 1px
+						background-color: darken($bg_color, 20%)
+				& ~ button
+					right: calc(100% - 4rem)
+		/*Input styles*/
+		::-webkit-search-cancel-button
+			-webkit-appearance: none
+			width: 1.5rem
+			height: 1.5rem
+			background: url($icon+"icon_close.svg") no-repeat center
+		/*Input suggestion*/
+		#suggestion
+			+normalize(0, 2px solid $color, .5rem)
+			overflow: hidden
+			height: 0
+			outline: none
+			border-top: none
+			border-radius: 0 0 1rem 1rem
+			option
+				+mode(darken($bg_color, 20%), transparent)
+				+normalize($p: .2rem 2.5rem)
+				border-radius: .25rem
+				background: url($icon+"icon_search.svg") no-repeat left
+			&:before
+				+normalize(.2rem auto, none, 0)
+				content: ''
+				display: block
+				width: 0
+				height: 0
+			&:focus
+				overflow: auto
+				height: auto
+				border-color: $color
+				border-top: 0 solid transparent
+				padding: 0 .5rem .5rem
+				+mode($color, lighten($bg_color, 30%)) 
+				&:before
+					width: 90%
+					height: 1px
+					background-color: $color
+		/*Search button*/	
+		button
+			position: absolute
+			z-index: 1
+			right: 1rem
+			outline: none
+			border-radius: 1rem
+		label
+			+mode(darken($bg_color, 20%), transparent)
+			position: absolute
+			display: none
+			top: .5rem
+			left: 4rem
+			font-size: .8rem
+			@media screen and (min-width: $sm)
+				font-size: 1rem
+	p
+		+normalize($p: 1rem 3rem)
+		strong
+			display: block

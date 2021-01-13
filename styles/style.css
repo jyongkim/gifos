@@ -6,7 +6,7 @@
   margin: 0 auto 5rem;
 }
 
-/*Content First*/
+/*Content first*/
 * {
   box-sizing: border-box;
   font-family: century gothic, sans-serif;
@@ -248,7 +248,7 @@ body {
   background: radial-gradient(ellipse at bottom right, #cbcbcb, #fefefe);
 }
 
-/*Navigation Bar*/
+/*Navigation bar*/
 nav {
   color: #572ee5;
   background-color: #fefefe;
@@ -263,7 +263,8 @@ nav {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  /*Main Menu*/
+  /*Main menu*/
+  /*Dropdown menu*/
 }
 @media screen and (min-width: 768px) {
   nav {
@@ -323,6 +324,10 @@ nav .menu {
     background-color: transparent;
   }
 }
+nav .menu li {
+  /*Light mode / Dark mode */
+  /*Create GIFO*/
+}
 @media screen and (min-width: 768px) {
   nav .menu li {
     border-bottom: 0.2rem solid transparent;
@@ -366,6 +371,202 @@ nav .menu li a::after {
   nav .menu li a::after {
     display: none;
   }
+}
+nav .menu li:first-child label {
+  cursor: pointer;
+  background-color: transparent;
+}
+nav .menu li:first-child label:after {
+  content: " Diurno";
+}
+nav .menu li:last-child a {
+  margin: 0;
+  border: 0;
+  padding: 0.25rem;
+  display: none;
+  border-radius: 50%;
+  width: 2.25rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  nav .menu li:last-child a {
+    display: block;
+  }
+  nav .menu li:last-child a:hover {
+    color: #fefefe;
+    background-color: #572ee5;
+  }
+}
+nav .menu li:last-child.active a {
+  color: #fefefe;
+  background-color: #cbcbcb;
+}
+nav .open {
+  display: block;
+  opacity: 0.8;
+}
+@media screen and (min-width: 768px) {
+  nav .open {
+    display: flex;
+    padding: 0;
+  }
+}
+
+/*Header*/
+#header {
+  color: #572ee5;
+  background-color: #fefefe;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  text-align: center;
+  /*Search form*/
+}
+#header h1 {
+  margin: auto;
+  border: none;
+  padding: 0.2rem 3rem;
+  max-width: 576px;
+}
+#header img {
+  margin: auto;
+  border: none;
+  padding: 0 1rem;
+  display: block;
+  width: 100%;
+  max-width: 432px;
+}
+#header form {
+  position: sticky;
+  top: 0;
+  margin: auto;
+  border: none;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 576px;
+  /*Search input*/
+  /*Input styles*/
+  /*Input suggestion*/
+  /*Search button*/	
+}
+#header form input {
+  margin: 0;
+  border: 2px solid #572ee5;
+  padding: 0.5rem;
+  outline: none;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: none;
+  width: 100%;
+  /*Suggestions display*/
+}
+#header form input:invalid {
+  padding: 0 1rem;
+}
+#header form input:invalid ~ #suggestion option {
+  display: none;
+}
+#header form input:invalid ~ label {
+  display: block;
+}
+#header form input:focus, #header form input:valid {
+  margin: 0;
+  border: 2px solid #572ee5;
+  padding: 0.5rem 0.25rem 0.5rem 3rem;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: none;
+}
+#header form input:focus ~ #suggestion, #header form input:valid ~ #suggestion {
+  overflow: auto;
+  height: auto;
+  padding: 0 0.5rem 0.5rem;
+}
+#header form input:focus ~ #suggestion:before, #header form input:valid ~ #suggestion:before {
+  width: 90%;
+  height: 1px;
+  background-color: #cbcbcb;
+}
+#header form input:focus ~ button, #header form input:valid ~ button {
+  right: calc(100% - 4rem);
+}
+#header form ::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url("../assets/icons/icon_close.svg") no-repeat center;
+}
+#header form #suggestion {
+  margin: 0;
+  border: 2px solid #572ee5;
+  padding: 0.5rem;
+  overflow: hidden;
+  height: 0;
+  outline: none;
+  border-top: none;
+  border-radius: 0 0 1rem 1rem;
+}
+#header form #suggestion option {
+  color: #cbcbcb;
+  background-color: transparent;
+  margin: 0;
+  border: 0;
+  padding: 0.2rem 2.5rem;
+  border-radius: 0.25rem;
+  background: url("../assets/icons/icon_search.svg") no-repeat left;
+}
+#header form #suggestion:before {
+  margin: 0.2rem auto;
+  border: none;
+  padding: 0;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+}
+#header form #suggestion:focus {
+  overflow: auto;
+  height: auto;
+  border-color: #572ee5;
+  border-top: 0 solid transparent;
+  padding: 0 0.5rem 0.5rem;
+  color: #572ee5;
+  background-color: white;
+}
+#header form #suggestion:focus:before {
+  width: 90%;
+  height: 1px;
+  background-color: #572ee5;
+}
+#header form button {
+  position: absolute;
+  z-index: 1;
+  right: 1rem;
+  outline: none;
+  border-radius: 1rem;
+}
+#header form label {
+  color: #cbcbcb;
+  background-color: transparent;
+  position: absolute;
+  display: none;
+  top: 0.5rem;
+  left: 4rem;
+  font-size: 0.8rem;
+}
+@media screen and (min-width: 576px) {
+  #header form label {
+    font-size: 1rem;
+  }
+}
+#header p {
+  margin: 0;
+  border: 0;
+  padding: 1rem 3rem;
+}
+#header p strong {
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */
