@@ -366,3 +366,71 @@
             const response = await fetchData.json();
             return response		
         };
+/* 	User actions */
+	//	Action buttons.
+    const userActions = () => {			
+        likeHit.forEach( (like) => like.addEventListener( 'click', () => { 
+            totalItems(like);
+            box.parentNode.parentNode.id == 'favoritos' ? location.reload() : null
+            box.id.includes('fav_') ? remStorage(id) : 
+            localStorage.getItem('fav_'+ box.id) ? remStorage('fav_' + box.id) : 
+                addStorage(box.id, 'fav_');
+            like.classList.toggle('active');
+        }	)	)
+        binHit.forEach( bin => bin.addEventListener( 'click', () => {
+            totalItems(bin);
+            box.parentNode.parentNode.id == 'mis_gifos' ? location.reload() : null
+            remStorage(box.id)
+        }	)	)	
+        openHit.forEach( open  => open.addEventListener('click', (e) => {	
+            totalItems(open);
+            box.classList.toggle('active');
+            open.classList.toggle('max');
+            open.classList.toggle('close');
+            prevItem.classList.toggle('selected');
+            nextItem.classList.toggle('selected');
+        }	)	)
+    }
+    const totalItems = (param) => { 
+        box = param.parentNode.parentNode.parentNode
+        item = param.parentNode.parentNode.parentNode.querySelector('img');
+    }
+
+    nextItem.addEventListener('click', () => changeItem(nextItem,true));
+    prevItem.addEventListener('click', () => changeItem(prevItem,false));
+
+    const changeItem = (item, type) => {
+        nowItem = document.querySelector('article.active');
+        nowItem ? null : 
+            document.querySelector('article.selected') ? 
+                nowItem = document.querySelector('article.selected') :
+                nowItem = document.querySelector('section:last-child article');
+        firstItem = nowItem.parentNode.firstElementChild;
+        lastItem  = nowItem.parentNode.lastElementChild;
+        switch(type){
+            case true:
+                nowItem == lastItem ? 
+                    newItem = firstItem : 
+                    newItem = nowItem.nextElementSibling;
+            break;
+            case false:
+                nowItem == firstItem ? 
+                    newItem = lastItem : 
+                    newItem = nowItem.previousElementSibling;
+            break;
+        }	
+        if(item.classList.contains('selected')){
+            nowItem.querySelector('.close').classList.add('max');
+            nowItem.querySelector('.max').classList.remove('close');
+            newItem.querySelector('.max').classList.add('close');
+            newItem.querySelector('.close').classList.remove('max');
+            nowItem.classList.remove('active');
+            newItem.classList.add('active');
+        } else {
+            nowItem.classList.contains('selected') ?
+                newItem.classList.toggle('selected') :
+                nowItem.classList.toggle('selected');
+            newItem.classList.contains('selected') ?
+                nowItem.classList.remove('selected') : null
+        }
+    }
