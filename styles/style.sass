@@ -599,3 +599,88 @@ main
 		align-items: center
 	@media screen and (min-width: $xl)
 		justify-content: space-around
+
+/*Dark mode*/
+#mode:checked
+	$color: #ccc
+	$bg_color: #333
+	& ~ * .night
+		fill: $bg_color
+	& ~ * ::-webkit-scrollbar-thumb
+		background: radial-gradient( ellipse at bottom right, darken($bg_color, 20%), $bg_color)	
+	/*Navigation*/
+	& ~ nav
+		+mode($color, $bg_color)
+		border-top: .2rem solid darken($bg_color, 20%)
+		#menu
+			+mode($color, $bg_color)
+		.menu
+			+mode($bg_color: darken($bg_color, 20%))
+			@media screen and (min-width: $md)
+				
+			li
+				+mode($color, $bg_color)
+				a
+					color: $color
+				&:first-child
+					label:after
+						content:' Nocturno'
+				&:last-child a:hover,
+				&.active:last-child a
+					+mode($bg_color, $color)
+				&.active a
+					+mode(darken($color, 20%), transparent)
+	/*Header*/
+	& ~ #header
+		+mode($color, $bg_color)
+		input, 
+		#suggestion
+			+mode($color, transparent)
+			border-color: $color
+		#suggestion:before
+			background-color: $color
+		option
+			+mode(darken($color, 20%), transparent)
+		::-webkit-search-cancel-button
+			background: url($icon+"icon_close_noc.svg") no-repeat center
+	/*Main content*/
+	& ~ main
+		+mode($color, $bg_color)
+		/*Page sections*/
+		section
+			+mode($color, $bg_color)
+			.button		
+				+mode($color, $bg_color)
+				border: .1rem solid $color
+				&:hover
+					+mode($bg_color, $color)
+		section:last-child
+			+mode($color, $bg_color: darken($bg_color, 10%))
+		#crear_gifo
+			article
+				+mode($color, $bg_color)
+				+normalize(auto, 1px solid $color, 1.5rem)
+			.menu 
+				border-color: $color
+				li
+					+mode($color, $bg_color)
+					border-color: $color
+				.active
+					+mode($bg_color, $color)
+
+		article.active
+			+mode($color, $bg_color)
+			.menu
+				border-bottom: .3rem solid $color
+				li
+					+mode($color, transparent)
+				.active
+					+mode($bg_color, color)
+	
+/*Footer*/
+	& ~ #footer
+		+mode($color, $bg_color)
+		border-bottom: .2rem solid darken($bg_color, 20%)
+		a[href="#"]
+			+mode($color, transparent)
+			font-weight: bold

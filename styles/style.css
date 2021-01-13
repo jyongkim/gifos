@@ -997,4 +997,132 @@ main .fav.active {
   }
 }
 
+/*Dark mode*/
+#mode:checked {
+  /*Navigation*/
+  /*Header*/
+  /*Main content*/
+}
+#mode:checked ~ * .night {
+  fill: #333;
+}
+#mode:checked ~ * ::-webkit-scrollbar-thumb {
+  background: radial-gradient(ellipse at bottom right, black, #333);
+}
+#mode:checked ~ nav {
+  color: #ccc;
+  background-color: #333;
+  border-top: 0.2rem solid black;
+}
+#mode:checked ~ nav #menu {
+  color: #ccc;
+  background-color: #333;
+}
+#mode:checked ~ nav .menu {
+  color: #572ee5;
+  background-color: black;
+}
+#mode:checked ~ nav .menu li {
+  color: #ccc;
+  background-color: #333;
+}
+#mode:checked ~ nav .menu li a {
+  color: #ccc;
+}
+#mode:checked ~ nav .menu li:first-child label:after {
+  content: " Nocturno";
+}
+#mode:checked ~ nav .menu li:last-child a:hover, #mode:checked ~ nav .menu li.active:last-child a {
+  color: #333;
+  background-color: #ccc;
+}
+#mode:checked ~ nav .menu li.active a {
+  color: #999999;
+  background-color: transparent;
+}
+#mode:checked ~ #header {
+  color: #ccc;
+  background-color: #333;
+}
+#mode:checked ~ #header input,
+#mode:checked ~ #header #suggestion {
+  color: #ccc;
+  background-color: transparent;
+  border-color: #ccc;
+}
+#mode:checked ~ #header #suggestion:before {
+  background-color: #ccc;
+}
+#mode:checked ~ #header option {
+  color: #999999;
+  background-color: transparent;
+}
+#mode:checked ~ #header ::-webkit-search-cancel-button {
+  background: url("../assets/icons/icon_close_noc.svg") no-repeat center;
+}
+#mode:checked ~ main {
+  color: #ccc;
+  background-color: #333;
+  /*Page sections*/
+}
+#mode:checked ~ main section {
+  color: #ccc;
+  background-color: #333;
+}
+#mode:checked ~ main section .button {
+  color: #ccc;
+  background-color: #333;
+  border: 0.1rem solid #ccc;
+}
+#mode:checked ~ main section .button:hover {
+  color: #333;
+  background-color: #ccc;
+}
+#mode:checked ~ main section:last-child {
+  color: #ccc;
+  background-color: #1a1a1a;
+}
+#mode:checked ~ main #crear_gifo article {
+  color: #ccc;
+  background-color: #333;
+  margin: auto;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+}
+#mode:checked ~ main #crear_gifo .menu {
+  border-color: #ccc;
+}
+#mode:checked ~ main #crear_gifo .menu li {
+  color: #ccc;
+  background-color: #333;
+  border-color: #ccc;
+}
+#mode:checked ~ main #crear_gifo .menu .active {
+  color: #333;
+  background-color: #ccc;
+}
+#mode:checked ~ main article.active {
+  color: #ccc;
+  background-color: #333;
+}
+#mode:checked ~ main article.active .menu {
+  border-bottom: 0.3rem solid #ccc;
+}
+#mode:checked ~ main article.active .menu li {
+  color: #ccc;
+  background-color: transparent;
+}
+#mode:checked ~ main article.active .menu .active {
+  color: #333;
+  background-color: color;
+}
+
+/*Footer*/
+ * & ~ #footer
+ * +mode($color, $bg_color)
+ * border-bottom: .2rem solid darken($bg_color, 20%)
+ * a[href="#"]
+ * +mode($color, transparent)
+ * font-weight: bold */
+
 /*# sourceMappingURL=style.css.map */
