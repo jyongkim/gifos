@@ -358,7 +358,7 @@ main
 	#search
 		display: block
 	/*GIF creation*/
-	#crear_gifo
+	#create_gifos
 		overflow: hidden
 		+normalize(auto, 0, 0)
 		flex-direction: column
@@ -481,7 +481,7 @@ main
 			border-radius: 1rem
 	/*Favorites area*/
 	#favoritos, 
-	#mis_gifos
+	#my_gifos
 		& > div
 			display: grid
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
@@ -656,7 +656,7 @@ main
 					+mode($bg_color, $color)
 		section:last-child
 			+mode($color, $bg_color: darken($bg_color, 10%))
-		#crear_gifo
+		#create_gifos
 			article
 				+mode($color, $bg_color)
 				+normalize(auto, 1px solid $color, 1.5rem)

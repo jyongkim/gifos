@@ -12,7 +12,6 @@
     let m = 0, s = 0;
     let likeHit = [], openHit = [], nowItem;
     let totalGifs = [], totalFavs = []
-
 /*	Event areas	*/
 	//	Navigation elements.
     const menuBtn	= document.querySelector('#menu');
@@ -30,18 +29,17 @@
     const pageArea 	= document.querySelector('#pagination')
     const trendArea = document.querySelector('#trending');
     //	Recording section.
-    const stageArea	= document.querySelectorAll('#crear_gifo .menu li');
-    const gifBtn 	= document.querySelector('#crear_gifo button');
-    const gifMedia 	= document.querySelector('#crear_gifo article video');
-    const gifView	= document.querySelector('#crear_gifo article img');
-    const recAgain	= document.querySelector('#crear_gifo .menu a');
+    const stageArea	= document.querySelectorAll('#create_gifos .menu li');
+    const gifBtn 	= document.querySelector('#create_gifos button');
+    const gifMedia 	= document.querySelector('#create_gifos article video');
+    const gifView	= document.querySelector('#create_gifos article img');
+    const recAgain	= document.querySelector('#create_gifos .menu a');
     //	Favorites section.
-    const favArea 	= document.querySelector('#favoritos div');
-    const noFavs 	= document.querySelector('#favoritos .noItems');
+    const favArea 	= document.querySelector('#favorites div');
+    const noFavs 	= document.querySelector('#favorites .noItems');
     //	Mis Gifos section.
-    const myGifs	= document.querySelector('#mis_gifos div')
-    const noGifs	= document.querySelector('#mis_gifos .noItems')
-
+    const myGifs	= document.querySelector('#my_gifos div')
+    const noGifs	= document.querySelector('#my_gifos .noItems')
 /*	Functions and methods	*/
 	//	Giphy API query.
     async function fetchAPI(url, editArea, buildArea, type = 'result') { 
@@ -379,7 +377,7 @@
         }	)	)
         binHit.forEach( bin => bin.addEventListener( 'click', () => {
             totalItems(bin);
-            box.parentNode.parentNode.id == 'mis_gifos' ? location.reload() : null
+            box.parentNode.parentNode.id == 'my_gifos' ? location.reload() : null
             remStorage(box.id)
         }	)	)	
         openHit.forEach( open  => open.addEventListener('click', (e) => {	
@@ -395,10 +393,8 @@
         box = param.parentNode.parentNode.parentNode
         item = param.parentNode.parentNode.parentNode.querySelector('img');
     }
-
     nextItem.addEventListener('click', () => changeItem(nextItem,true));
     prevItem.addEventListener('click', () => changeItem(prevItem,false));
-
     const changeItem = (item, type) => {
         nowItem = document.querySelector('article.active');
         nowItem ? null : 

@@ -669,7 +669,7 @@ main .title:empty ~ #pagination {
 main #search {
   display: block;
 }
-main #crear_gifo {
+main #create_gifos {
   overflow: hidden;
   margin: auto;
   border: 0;
@@ -683,10 +683,10 @@ main #crear_gifo {
   /*Process area*/
 }
 @media screen and (min-width: 768px) {
-  main #crear_gifo {
+  main #create_gifos {
     height: auto;
   }
-  main #crear_gifo .camera {
+  main #create_gifos .camera {
     position: absolute;
     left: -30%;
     width: 20vw;
@@ -698,12 +698,12 @@ main #crear_gifo {
   }
 }
 @media screen and (min-width: 768px) and (min-width: 992px) {
-  main #crear_gifo .camera {
+  main #create_gifos .camera {
     left: -35%;
   }
 }
 @media screen and (min-width: 768px) {
-  main #crear_gifo .tape {
+  main #create_gifos .tape {
     position: absolute;
     bottom: -10%;
     right: -22.5%;
@@ -715,11 +715,11 @@ main #crear_gifo {
   }
 }
 @media screen and (min-width: 768px) and (min-width: 992px) {
-  main #crear_gifo .tape {
+  main #create_gifos .tape {
     right: -20%;
   }
 }
-main #crear_gifo article {
+main #create_gifos article {
   color: #572ee5;
   background-color: transparent;
   margin: auto;
@@ -734,7 +734,7 @@ main #crear_gifo article {
   max-width: 540px;
   min-height: 320px;
 }
-main #crear_gifo article video, main #crear_gifo article img {
+main #create_gifos article video, main #create_gifos article img {
   position: absolute;
   top: 15%;
   bottom: 15%;
@@ -744,24 +744,24 @@ main #crear_gifo article video, main #crear_gifo article img {
   height: 70%;
   opacity: 0;
 }
-main #crear_gifo article .message {
+main #create_gifos article .message {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-main #crear_gifo article .message::after {
+main #create_gifos article .message::after {
   content: "mensaje de prueba";
 }
-main #crear_gifo:target {
+main #create_gifos:target {
   display: flex;
 }
-main #crear_gifo div:last-child {
+main #create_gifos div:last-child {
   width: 62.5%;
   max-width: 720px;
 }
-main #crear_gifo .menu {
+main #create_gifos .menu {
   margin: auto;
   border: none;
   padding: 0;
@@ -773,7 +773,7 @@ main #crear_gifo .menu {
   flex-wrap: wrap;
   border-bottom: 0.3rem solid #572ee5;
 }
-main #crear_gifo .menu li {
+main #create_gifos .menu li {
   color: #572ee5;
   background-color: transparent;
   margin: 0.5rem;
@@ -783,15 +783,15 @@ main #crear_gifo .menu li {
   border-radius: 50%;
   font: 1rem sans-serif;
 }
-main #crear_gifo .menu a {
+main #create_gifos .menu a {
   position: absolute;
   right: 2.5%;
 }
-main #crear_gifo .menu .active {
+main #create_gifos .menu .active {
   color: #fefefe;
   background-color: #572ee5;
 }
-main #crear_gifo button {
+main #create_gifos button {
   cursor: pointer;
   color: #572ee5;
   background-color: #fefefe;
@@ -803,7 +803,7 @@ main #crear_gifo button {
   text-align: center;
   line-height: 1rem;
 }
-main #crear_gifo .show {
+main #create_gifos .show {
   display: block;
   opacity: 1;
 }
@@ -837,17 +837,17 @@ main #pagination .button {
   border-radius: 1rem;
 }
 main #favoritos > div,
-main #mis_gifos > div {
+main #my_gifos > div {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 0.5rem;
 }
 main #favoritos .noItems,
-main #mis_gifos .noItems {
+main #my_gifos .noItems {
   display: block;
 }
 main #favoritos:target #search,
-main #mis_gifos:target #search {
+main #my_gifos:target #search {
   height: 0;
   overflow: hidden;
 }
@@ -1082,22 +1082,22 @@ main .fav.active {
   color: #ccc;
   background-color: #1a1a1a;
 }
-#mode:checked ~ main #crear_gifo article {
+#mode:checked ~ main #create_gifos article {
   color: #ccc;
   background-color: #333;
   margin: auto;
   border: 1px solid #ccc;
   padding: 1.5rem;
 }
-#mode:checked ~ main #crear_gifo .menu {
+#mode:checked ~ main #create_gifos .menu {
   border-color: #ccc;
 }
-#mode:checked ~ main #crear_gifo .menu li {
+#mode:checked ~ main #create_gifos .menu li {
   color: #ccc;
   background-color: #333;
   border-color: #ccc;
 }
-#mode:checked ~ main #crear_gifo .menu .active {
+#mode:checked ~ main #create_gifos .menu .active {
   color: #333;
   background-color: #ccc;
 }
