@@ -299,3 +299,282 @@ nav
 		+normalize($p: 1rem 3rem)
 		strong
 			display: block
+
+/*Main content*/
+main
+	+mode
+	+normalize($p: 0)
+	/*Page sections*/
+	section
+		position: relative
+		+mode
+		+normalize
+		max-width: $lg
+		height: auto
+		text-align: center
+		@media screen and (min-width: $md)
+			+normalize(auto, none, 3rem 3rem 1rem)
+		h1
+			display: flex
+			flex-direction: column
+			line-height: 2.5rem
+		&:not(target)
+			display: none
+		&:target
+			display: block
+	/*Trending elements*/
+	section:last-child
+		display: block
+		+mode($bg_color: darken($bg_color, 10%))
+		/*Navigation and displays*/
+		.button
+			display: none
+			position: absolute
+			top: calc(65% - 1rem)
+			border-radius: .25rem
+			font-size: 1rem
+			line-height: 1.5rem
+			text-align: center
+			@media screen and (min-width: $md)
+				display: block
+			&.prev
+				left: 0
+				@media screen and (min-width: $lg)
+					left: 4rem
+			&.next
+				right: 0
+				@media screen and (min-width: $lg)
+					right: 4rem
+		button.selected
+			position: fixed
+			top: calc(50% - 1rem)
+			z-index: 5
+	.title
+		+normalize
+		font-size: 2rem
+		&:empty ~ #pagination
+			display: none
+	/*Search results*/
+	#search
+		display: block
+	/*GIF creation*/
+	#crear_gifo
+		overflow: hidden
+		+normalize(auto, 0, 0)
+		flex-direction: column
+		justify-content: center
+		align-items: center
+		flex-wrap: wrap
+		height: 0
+		@media screen and (min-width: $md)
+			height: auto
+			.camera
+				position: absolute
+				left: -30%
+				width: 20vw
+				min-width: 4rem
+				max-width: 12rem
+				height: 8rem
+				background: $camera
+				background-size: 70%, 45%
+				@media screen and (min-width: $lg)
+					left: -35%
+			.tape
+				position: absolute
+				bottom: -10%
+				right: -22.5%
+				min-width: 2rem
+				max-width: 4rem
+				height: 4rem
+				background: $tape
+				background-size: contain
+				@media screen and (min-width: $lg)
+					right: -20%
+		/*Recording area*/
+		article
+			+mode($color, transparent)
+			+normalize(auto, 1px solid $color, 1.5rem)
+			overflow: visible
+			position: relative
+			display: flex
+			justify-content: center
+			align-items: center
+			width: 60%
+			max-width: 540px
+			min-height: 320px
+			video, img
+				position: absolute
+				top: 15%
+				bottom: 15%
+				left: 20%
+				right: 20%
+				width: 60%
+				height: 70%
+				opacity: 0
+			.message
+				position: absolute
+				top: 0
+				left: 0
+				width: 100%
+				height: 100%
+				&::after
+					content: 'mensaje de prueba'				
+		&:target
+			display: flex
+		div:last-child
+			width: 62.5%
+			max-width: 720px
+		/*Process area*/
+		.menu
+			+normalize(auto, none, 0)
+			position: relative
+			list-style: none
+			display: flex
+			justify-content: center
+			align-items: center
+			flex-wrap: wrap
+			border-bottom: .3rem solid $color
+			li
+				+mode($color, transparent)
+				+normalize(.5rem, 1px solid $color, .25rem .6rem)
+				display: block
+				border-radius: 50%
+				font: 1rem sans-serif
+			a
+				position: absolute
+				right: 2.5%
+			.active
+				+mode($bg_color,$color)
+		button
+			cursor: pointer
+			+mode($color,$bg_color)
+			+normalize(1rem, 1px solid $color, .5rem)
+			border-radius: 1rem
+			width: 6rem
+			text-align: center
+			line-height: 1rem
+		.show
+			display: block
+			opacity: 1
+	/*Results area*/
+	#results
+		overflow: hidden
+		display: grid
+		grid-template-columns: repeat(auto-fill, minmax(200px, 2fr))
+		justify-content: center
+		gap: .5rem
+		padding: 1rem
+	/*Pagination area*/
+	#pagination
+		ul
+			+normalize($p:.5rem)
+			list-style: none
+			display: flex
+			flex-wrap: wrap
+			justify-content: center
+			li
+				+normalize($p: .5rem)
+				max-width: 150px
+			strong
+				display: block
+		.button
+			border-radius: 1rem
+	/*Favorites area*/
+	#favoritos, 
+	#mis_gifos
+		& > div
+			display: grid
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+			gap: .5rem
+		.noItems
+			display: block
+		&:target #search
+			height: 0
+			overflow: hidden
+	/*Trending GIFs*/
+	#trending
+		overflow: auto
+		max-height: 250px
+		display: grid
+		grid-template-columns: repeat(3, 250px)
+		justify-content: flex-start
+		align-content: center
+		@media screen and (min-width: $md)
+			justify-content: center
+	/*Independent elements*/
+	article:not(.active)
+		overflow: hidden
+		position: relative
+		display: flex
+		justify-content: center
+		align-items: center
+		max-width: 300px
+		max-height: 200px
+		margin: .5rem
+		background-color: darken($bg_color, 100%)
+		.hidden
+			+mode($bg_color, rgba(87, 46, 229, .5))
+			+normalize($p: .5rem)
+			display: grid
+			justify-content: flex-start
+			align-content: flex-end
+			position: absolute
+			top: -100%
+			bottom: 100%
+			left: 0
+			right: 0
+			.social
+				position: absolute
+				top: .5rem
+				right: .5rem
+			p
+				max-width: 70%
+				+normalize(0, none, .2rem)
+				text-align: left
+		&:hover,
+		&.selected
+			.hidden
+				bottom: 0
+				top: 0	
+			a
+				+normalize(.25rem)
+				width: 1.5rem
+				height: 1.5rem
+	article.active
+		+mode
+		position: fixed
+		top: 0
+		left: 0
+		z-index: 3
+		width: 100vw
+		height: 100vh
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+		img
+			position: relative
+			+normalize(4.2rem auto .5rem, 0, 0)
+			width: 100%
+			max-width: 480px
+			max-height: 360px
+		.hidden
+			position: static
+			display: flex
+			justify-content: space-between
+			width: 100%
+			max-width: 480px
+			text-align: left
+			a
+				width: 2rem
+				height: 2rem
+			.close
+				position: fixed
+				top: 1rem
+				right: 1rem
+	video, img
+		height: 100%
+	/*Local storage*/
+	.fav.active
+		background: url($icon+"icon_fav_active.svg") no-repeat center, radial-gradient($bg_color, darken($bg_color, 20%)) !important
+		background-size: 1.25rem !important

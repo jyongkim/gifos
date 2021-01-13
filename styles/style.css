@@ -569,4 +569,396 @@ nav .open {
   display: block;
 }
 
+/*Main content*/
+main {
+  color: #572ee5;
+  background-color: #fefefe;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  /*Page sections*/
+  /*Trending elements*/
+  /*Search results*/
+  /*GIF creation*/
+  /*Results area*/
+  /*Pagination area*/
+  /*Favorites area*/
+  /*Trending GIFs*/
+  /*Independent elements*/
+  /*Local storage*/
+}
+main section {
+  position: relative;
+  color: #572ee5;
+  background-color: #fefefe;
+  margin: 0;
+  border: 0;
+  padding: 1rem;
+  max-width: 992px;
+  height: auto;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  main section {
+    margin: auto;
+    border: none;
+    padding: 3rem 3rem 1rem;
+  }
+}
+main section h1 {
+  display: flex;
+  flex-direction: column;
+  line-height: 2.5rem;
+}
+main section:not(target) {
+  display: none;
+}
+main section:target {
+  display: block;
+}
+main section:last-child {
+  display: block;
+  color: #572ee5;
+  background-color: #e5e5e5;
+  /*Navigation and displays*/
+}
+main section:last-child .button {
+  display: none;
+  position: absolute;
+  top: calc(65% - 1rem);
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  main section:last-child .button {
+    display: block;
+  }
+}
+main section:last-child .button.prev {
+  left: 0;
+}
+@media screen and (min-width: 992px) {
+  main section:last-child .button.prev {
+    left: 4rem;
+  }
+}
+main section:last-child .button.next {
+  right: 0;
+}
+@media screen and (min-width: 992px) {
+  main section:last-child .button.next {
+    right: 4rem;
+  }
+}
+main section:last-child button.selected {
+  position: fixed;
+  top: calc(50% - 1rem);
+  z-index: 5;
+}
+main .title {
+  margin: 0;
+  border: 0;
+  padding: 1rem;
+  font-size: 2rem;
+}
+main .title:empty ~ #pagination {
+  display: none;
+}
+main #search {
+  display: block;
+}
+main #crear_gifo {
+  overflow: hidden;
+  margin: auto;
+  border: 0;
+  padding: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 0;
+  /*Recording area*/
+  /*Process area*/
+}
+@media screen and (min-width: 768px) {
+  main #crear_gifo {
+    height: auto;
+  }
+  main #crear_gifo .camera {
+    position: absolute;
+    left: -30%;
+    width: 20vw;
+    min-width: 4rem;
+    max-width: 12rem;
+    height: 8rem;
+    background: url("../assets/icons/bg_camera.svg") no-repeat left center, url("../assets/icons/bg_light.svg") no-repeat right center;
+    background-size: 70%, 45%;
+  }
+}
+@media screen and (min-width: 768px) and (min-width: 992px) {
+  main #crear_gifo .camera {
+    left: -35%;
+  }
+}
+@media screen and (min-width: 768px) {
+  main #crear_gifo .tape {
+    position: absolute;
+    bottom: -10%;
+    right: -22.5%;
+    min-width: 2rem;
+    max-width: 4rem;
+    height: 4rem;
+    background: url("../assets/icons/bg_tape.svg") no-repeat right center;
+    background-size: contain;
+  }
+}
+@media screen and (min-width: 768px) and (min-width: 992px) {
+  main #crear_gifo .tape {
+    right: -20%;
+  }
+}
+main #crear_gifo article {
+  color: #572ee5;
+  background-color: transparent;
+  margin: auto;
+  border: 1px solid #572ee5;
+  padding: 1.5rem;
+  overflow: visible;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  max-width: 540px;
+  min-height: 320px;
+}
+main #crear_gifo article video, main #crear_gifo article img {
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+  left: 20%;
+  right: 20%;
+  width: 60%;
+  height: 70%;
+  opacity: 0;
+}
+main #crear_gifo article .message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+main #crear_gifo article .message::after {
+  content: "mensaje de prueba";
+}
+main #crear_gifo:target {
+  display: flex;
+}
+main #crear_gifo div:last-child {
+  width: 62.5%;
+  max-width: 720px;
+}
+main #crear_gifo .menu {
+  margin: auto;
+  border: none;
+  padding: 0;
+  position: relative;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 0.3rem solid #572ee5;
+}
+main #crear_gifo .menu li {
+  color: #572ee5;
+  background-color: transparent;
+  margin: 0.5rem;
+  border: 1px solid #572ee5;
+  padding: 0.25rem 0.6rem;
+  display: block;
+  border-radius: 50%;
+  font: 1rem sans-serif;
+}
+main #crear_gifo .menu a {
+  position: absolute;
+  right: 2.5%;
+}
+main #crear_gifo .menu .active {
+  color: #fefefe;
+  background-color: #572ee5;
+}
+main #crear_gifo button {
+  cursor: pointer;
+  color: #572ee5;
+  background-color: #fefefe;
+  margin: 1rem;
+  border: 1px solid #572ee5;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  width: 6rem;
+  text-align: center;
+  line-height: 1rem;
+}
+main #crear_gifo .show {
+  display: block;
+  opacity: 1;
+}
+main #results {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 2fr));
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+main #pagination ul {
+  margin: 0;
+  border: 0;
+  padding: 0.5rem;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+main #pagination ul li {
+  margin: 0;
+  border: 0;
+  padding: 0.5rem;
+  max-width: 150px;
+}
+main #pagination ul strong {
+  display: block;
+}
+main #pagination .button {
+  border-radius: 1rem;
+}
+main #favoritos > div,
+main #mis_gifos > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+main #favoritos .noItems,
+main #mis_gifos .noItems {
+  display: block;
+}
+main #favoritos:target #search,
+main #mis_gifos:target #search {
+  height: 0;
+  overflow: hidden;
+}
+main #trending {
+  overflow: auto;
+  max-height: 250px;
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  justify-content: flex-start;
+  align-content: center;
+}
+@media screen and (min-width: 768px) {
+  main #trending {
+    justify-content: center;
+  }
+}
+main article:not(.active) {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  max-height: 200px;
+  margin: 0.5rem;
+  background-color: black;
+}
+main article:not(.active) .hidden {
+  color: #fefefe;
+  background-color: rgba(87, 46, 229, 0.5);
+  margin: 0;
+  border: 0;
+  padding: 0.5rem;
+  display: grid;
+  justify-content: flex-start;
+  align-content: flex-end;
+  position: absolute;
+  top: -100%;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+}
+main article:not(.active) .hidden .social {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+main article:not(.active) .hidden p {
+  max-width: 70%;
+  margin: 0;
+  border: none;
+  padding: 0.2rem;
+  text-align: left;
+}
+main article:not(.active):hover .hidden, main article:not(.active).selected .hidden {
+  bottom: 0;
+  top: 0;
+}
+main article:not(.active):hover a, main article:not(.active).selected a {
+  margin: 0.25rem;
+  border: 0;
+  padding: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+main article.active {
+  color: #572ee5;
+  background-color: #fefefe;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+main article.active img {
+  position: relative;
+  margin: 4.2rem auto 0.5rem;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 360px;
+}
+main article.active .hidden {
+  position: static;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 480px;
+  text-align: left;
+}
+main article.active .hidden a {
+  width: 2rem;
+  height: 2rem;
+}
+main article.active .hidden .close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+main video, main img {
+  height: 100%;
+}
+main .fav.active {
+  background: url("../assets/icons/icon_fav_active.svg") no-repeat center, radial-gradient(#fefefe, #cbcbcb) !important;
+  background-size: 1.25rem !important;
+}
+
 /*# sourceMappingURL=style.css.map */
