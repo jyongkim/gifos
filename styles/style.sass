@@ -3,7 +3,7 @@ $color: #572ee5
 $bg_color: #fefefe
 $special_color: #33c9ca
 
-// Media screen.
+// Media Screen.
 $sm: 576px
 $md: 768px
 $lg: 992px
@@ -30,5 +30,45 @@ $icons: logo, search, link, fav, trash, max, close, download, facebook, instagra
 .notFound
 	margin: 0 auto 5rem
 
+/*Content First*/
+*
+	box-sizing: border-box
+	font-family: century gothic, sans-serif
+	outline: none
+	background-color: transparent
+	text-decoration: none
+	transition: all .5s ease-in
+#mode
+	display: none
+body
+	margin:0
 
-/*Test */
+/*Icons*/
+.icon
+	display: inline-block
+	+normalize(.5rem,0,0)
+	border-radius: .25rem
+	width: 1.5rem
+	height: 1.5rem
+	background-repeat: no-repeat
+	background-position: center
+	background-size: contain
+@each $ico in $icons	
+	/*Logo light mode*/
+	.#{$ico}
+		background-image: url($icon+"icon_"+$ico+".svg")
+	/*Logo hover mode*/
+	.#{$ico}:hover,
+	#mode:checked ~ * .#{$ico}:hover
+		background-image: url($icon+"icon_"+$ico+"_hover.svg")
+	/*Logo dark mode*/
+	#mode:checked ~ * .#{$ico}
+		background-image: url($icon+"icon_"+$ico+"_noc.svg")
+.special
+	color: $special_color
+.button
+	cursor: pointer
+	+mode($color, transparent)
+	+normalize(.5rem, .1rem solid $color, .5rem .75rem)
+	&:hover
+		+mode($bg_color, $color)

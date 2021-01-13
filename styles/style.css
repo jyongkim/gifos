@@ -6,6 +6,229 @@
   margin: 0 auto 5rem;
 }
 
-/*Test */
+/*Content First*/
+* {
+  box-sizing: border-box;
+  font-family: century gothic, sans-serif;
+  outline: none;
+  background-color: transparent;
+  text-decoration: none;
+  transition: all 0.5s ease-in;
+}
+
+#mode {
+  display: none;
+}
+
+body {
+  margin: 0;
+}
+
+/*Icons*/
+.icon {
+  display: inline-block;
+  margin: 0.5rem;
+  border: 0;
+  padding: 0;
+  border-radius: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/*Logo light mode*/
+.logo {
+  background-image: url("../assets/icons/icon_logo.svg");
+}
+
+/*Logo hover mode*/
+.logo:hover,
+#mode:checked ~ * .logo:hover {
+  background-image: url("../assets/icons/icon_logo_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .logo {
+  background-image: url("../assets/icons/icon_logo_noc.svg");
+}
+
+/*Logo light mode*/
+.search {
+  background-image: url("../assets/icons/icon_search.svg");
+}
+
+/*Logo hover mode*/
+.search:hover,
+#mode:checked ~ * .search:hover {
+  background-image: url("../assets/icons/icon_search_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .search {
+  background-image: url("../assets/icons/icon_search_noc.svg");
+}
+
+/*Logo light mode*/
+.link {
+  background-image: url("../assets/icons/icon_link.svg");
+}
+
+/*Logo hover mode*/
+.link:hover,
+#mode:checked ~ * .link:hover {
+  background-image: url("../assets/icons/icon_link_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .link {
+  background-image: url("../assets/icons/icon_link_noc.svg");
+}
+
+/*Logo light mode*/
+.fav {
+  background-image: url("../assets/icons/icon_fav.svg");
+}
+
+/*Logo hover mode*/
+.fav:hover,
+#mode:checked ~ * .fav:hover {
+  background-image: url("../assets/icons/icon_fav_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .fav {
+  background-image: url("../assets/icons/icon_fav_noc.svg");
+}
+
+/*Logo light mode*/
+.trash {
+  background-image: url("../assets/icons/icon_trash.svg");
+}
+
+/*Logo hover mode*/
+.trash:hover,
+#mode:checked ~ * .trash:hover {
+  background-image: url("../assets/icons/icon_trash_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .trash {
+  background-image: url("../assets/icons/icon_trash_noc.svg");
+}
+
+/*Logo light mode*/
+.max {
+  background-image: url("../assets/icons/icon_max.svg");
+}
+
+/*Logo hover mode*/
+.max:hover,
+#mode:checked ~ * .max:hover {
+  background-image: url("../assets/icons/icon_max_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .max {
+  background-image: url("../assets/icons/icon_max_noc.svg");
+}
+
+/*Logo light mode*/
+.close {
+  background-image: url("../assets/icons/icon_close.svg");
+}
+
+/*Logo hover mode*/
+.close:hover,
+#mode:checked ~ * .close:hover {
+  background-image: url("../assets/icons/icon_close_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .close {
+  background-image: url("../assets/icons/icon_close_noc.svg");
+}
+
+/*Logo light mode*/
+.download {
+  background-image: url("../assets/icons/icon_download.svg");
+}
+
+/*Logo hover mode*/
+.download:hover,
+#mode:checked ~ * .download:hover {
+  background-image: url("../assets/icons/icon_download_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .download {
+  background-image: url("../assets/icons/icon_download_noc.svg");
+}
+
+/*Logo light mode*/
+.facebook {
+  background-image: url("../assets/icons/icon_facebook.svg");
+}
+
+/*Logo hover mode*/
+.facebook:hover,
+#mode:checked ~ * .facebook:hover {
+  background-image: url("../assets/icons/icon_facebook_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .facebook {
+  background-image: url("../assets/icons/icon_facebook_noc.svg");
+}
+
+/*Logo light mode*/
+.instagram {
+  background-image: url("../assets/icons/icon_instagram.svg");
+}
+
+/*Logo hover mode*/
+.instagram:hover,
+#mode:checked ~ * .instagram:hover {
+  background-image: url("../assets/icons/icon_instagram_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .instagram {
+  background-image: url("../assets/icons/icon_instagram_noc.svg");
+}
+
+/*Logo light mode*/
+.twitter {
+  background-image: url("../assets/icons/icon_twitter.svg");
+}
+
+/*Logo hover mode*/
+.twitter:hover,
+#mode:checked ~ * .twitter:hover {
+  background-image: url("../assets/icons/icon_twitter_hover.svg");
+}
+
+/*Logo dark mode*/
+#mode:checked ~ * .twitter {
+  background-image: url("../assets/icons/icon_twitter_noc.svg");
+}
+
+.special {
+  color: #33c9ca;
+}
+
+.button {
+  cursor: pointer;
+  color: #572ee5;
+  background-color: transparent;
+  margin: 0.5rem;
+  border: 0.1rem solid #572ee5;
+  padding: 0.5rem 0.75rem;
+}
+.button:hover {
+  color: #fefefe;
+  background-color: #572ee5;
+}
 
 /*# sourceMappingURL=style.css.map */
