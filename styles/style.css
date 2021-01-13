@@ -248,4 +248,52 @@ body {
   background: radial-gradient(ellipse at bottom right, #cbcbcb, #fefefe);
 }
 
+/*Navigation Bar*/
+nav {
+  color: #572ee5;
+  background-color: #fefefe;
+  margin: 0;
+  border: 0;
+  padding: 0.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-top: 0.2rem solid #572ee5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 1rem;
+  }
+  nav #menu {
+    display: none;
+  }
+}
+@media screen and (min-width: 1140px) {
+  nav {
+    justify-content: space-around;
+  }
+}
+nav .icon {
+  margin: 0 0.5rem;
+  border: 0;
+  padding: 1rem;
+  width: 3rem;
+  height: 3rem;
+}
+nav #menu {
+  color: #572ee5;
+  background-color: #fefefe;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  line-height: 1.5rem;
+  font-size: 2rem;
+}
+
 /*# sourceMappingURL=style.css.map */

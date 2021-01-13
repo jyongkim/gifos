@@ -84,3 +84,33 @@ body
 	+normalize(.5rem auto)
 	border-radius: 1rem
 	background: radial-gradient( ellipse at bottom right, darken($bg_color, 20%), $bg_color)
+
+/*Navigation Bar*/
+nav
+	+mode
+	+normalize($p: .5rem 0)
+	position: sticky
+	top: 0
+	z-index: 2
+	border-top: .2rem solid $color
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+	align-items: center
+	@media screen and (min-width: $md)
+		display: flex
+		justify-content: space-between
+		padding: .2rem 1rem
+		#menu
+			display: none
+	@media screen and (min-width: $xl)
+		justify-content: space-around
+	.icon
+		+normalize(0 .5rem)
+		width: 3rem
+		height: 3rem
+	#menu
+		+mode
+		+normalize($p:0)
+		line-height: 1.5rem
+		font-size: 2rem
