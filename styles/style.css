@@ -961,4 +961,40 @@ main .fav.active {
   background-size: 1.25rem !important;
 }
 
+#footer {
+  color: #060212;
+  background-color: #fefefe;
+  margin: 0;
+  border: 0;
+  padding: 1rem;
+  border-bottom: 0.2rem solid #572ee5;
+  text-align: center;
+  /*Social networks*/
+}
+#footer a {
+  font-weight: bold;
+}
+#footer .social {
+  margin: 3rem auto;
+}
+@media screen and (min-width: 768px) {
+  #footer .social {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  #footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 1140px) {
+  #footer {
+    justify-content: space-around;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

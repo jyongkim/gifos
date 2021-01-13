@@ -578,3 +578,24 @@ main
 	.fav.active
 		background: url($icon+"icon_fav_active.svg") no-repeat center, radial-gradient($bg_color, darken($bg_color, 20%)) !important
 		background-size: 1.25rem !important
+
+#footer
+	+mode(darken($color, 50%), $bg_color)
+	+normalize
+	border-bottom: .2rem solid $color
+	text-align: center
+	a
+		font-weight: bold
+	/*Social networks*/
+	.social
+		margin: 3rem auto
+		@media screen and (min-width: $md)
+			display: flex
+			align-items: center
+			margin: 0
+	@media screen and (min-width: $md)
+		display: flex
+		justify-content: space-between
+		align-items: center
+	@media screen and (min-width: $xl)
+		justify-content: space-around
