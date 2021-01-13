@@ -72,3 +72,15 @@ body
 	+normalize(.5rem, .1rem solid $color, .5rem .75rem)
 	&:hover
 		+mode($bg_color, $color)
+
+/*Webkit*/
+::-webkit-scrollbar,
+.scroller
+	-webkit-appearance: none
+	border-radius: .5rem
+::-webkit-scrollbar-thumb,
+.scroller
+	-webkit-appearance: none
+	+normalize(.5rem auto)
+	border-radius: 1rem
+	background: radial-gradient( ellipse at bottom right, darken($bg_color, 20%), $bg_color)

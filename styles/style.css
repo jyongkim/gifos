@@ -231,4 +231,21 @@ body {
   background-color: #572ee5;
 }
 
+/*Webkit*/
+::-webkit-scrollbar,
+.scroller {
+  -webkit-appearance: none;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb,
+.scroller {
+  -webkit-appearance: none;
+  margin: 0.5rem auto;
+  border: 0;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: radial-gradient(ellipse at bottom right, #cbcbcb, #fefefe);
+}
+
 /*# sourceMappingURL=style.css.map */
