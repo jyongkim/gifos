@@ -29,11 +29,11 @@
     const pageArea 	= document.querySelector('#pagination')
     const trendArea = document.querySelector('#trending');
     //	Recording section.
-    const stageArea	= document.querySelectorAll('#create_gifos .menu li');
-    const gifBtn 	= document.querySelector('#create_gifos button');
-    const gifMedia 	= document.querySelector('#create_gifos article video');
-    const gifView	= document.querySelector('#create_gifos article img');
-    const recAgain	= document.querySelector('#create_gifos .menu a');
+    const stageArea	= document.querySelectorAll('#create_gifo .menu li');
+    const gifBtn 	= document.querySelector('#create_gifo button');
+    const gifMedia 	= document.querySelector('#create_gifo article video');
+    const gifView	= document.querySelector('#create_gifo article img');
+    const recAgain	= document.querySelector('#create_gifo .menu a');
     //	Favorites section.
     const favArea 	= document.querySelector('#favorites div');
     const noFavs 	= document.querySelector('#favorites .noItems');
@@ -93,7 +93,7 @@
                             </li>
                         </ul>
                         <button class="button">
-                            ${ offset + limit <= total ? "VER MAS...": "NO HAY MAS RESULTADOS" }
+                            ${ offset + limit <= total ? "VER MÁS...": "NO HAY MÁS RESULTADOS." }
                         </button>`
                 } else if (url.includes('search')){
                     noResults(pageArea, 'results');
@@ -108,13 +108,13 @@
             const noResults = (editArea, icon) =>{
                 switch(icon){
                     case 'favs': 
-                        msg = `"¡guarda tu primer Gifo en favoritos <br/> para que se muestre aqui!"`; 
+                        msg = `"¡Guarda tu primer Gifo en favoritos <br/> para que se muestre aquí!"`; 
                     break;
                     case 'results': 
-                        msg = `"intenta con otra busqueda"`; 
+                        msg = `"Intenta con otra búsqueda."`; 
                     break; 
                     case 'gifs': 
-                        msg = `"Animate a crear tu primer GIFO"`; 
+                        msg = `"¡Anímate a crear tu primer GIFO!"`; 
                     break;
                 }
                 editArea.innerHTML = `
@@ -137,7 +137,7 @@
 			const timeStop = () => {
 				clearInterval(recTime);
 				m = 0; s = 0;
-			    recAgain.innerHTML = `Repetir Captura`
+			    recAgain.innerHTML = `Repetir captura`
             }
         //	Gifs creation.
 			const setPhase = (type) => {
@@ -369,7 +369,7 @@
     const userActions = () => {			
         likeHit.forEach( (like) => like.addEventListener( 'click', () => { 
             totalItems(like);
-            box.parentNode.parentNode.id == 'favoritos' ? location.reload() : null
+            box.parentNode.parentNode.id == 'favorites' ? location.reload() : null
             box.id.includes('fav_') ? remStorage(id) : 
             localStorage.getItem('fav_'+ box.id) ? remStorage('fav_' + box.id) : 
                 addStorage(box.id, 'fav_');
