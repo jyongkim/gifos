@@ -137,7 +137,7 @@
 			const timeStop = () => {
 				clearInterval(recTime);
 				m = 0; s = 0;
-			    recAgain.innerHTML = `Repetir captura`
+			    recAgain.innerHTML = `Repetir captura`;
             }
         //	Gifs creation.
 			const setPhase = (type) => {
@@ -342,7 +342,7 @@
     //	Upload recording.
         async function uploadGif() {
         //	Starting the upload.
-            alert("***comenzando subida***");
+            alert("***Comenzando la subida.***");
             const formData = new FormData();
             formData.append("file", gifSrc, "api_Gifo.gif");
                 const params = {
@@ -353,7 +353,7 @@
         // 	Query upload URL.
             const data = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
             console.log(await data);
-            alert("***subida exitosa***");
+            alert("***¡La subida fue exitosa!***");
             id = data.data.id;
             item = data.data;
             addStorage(id, 'gif_');
