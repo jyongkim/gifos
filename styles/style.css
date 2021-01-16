@@ -257,7 +257,7 @@ nav {
   padding: 0.5rem 0;
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 3;
   border-top: 0.2rem solid #572ee5;
   display: flex;
   flex-wrap: wrap;
@@ -641,7 +641,7 @@ main section:last-child .button.prev {
 }
 @media screen and (min-width: 992px) {
   main section:last-child .button.prev {
-    left: 4rem;
+    left: 3rem;
   }
 }
 main section:last-child .button.next {
@@ -649,7 +649,7 @@ main section:last-child .button.next {
 }
 @media screen and (min-width: 992px) {
   main section:last-child .button.next {
-    right: 4rem;
+    right: 3rem;
   }
 }
 main section:last-child button.selected {
@@ -694,11 +694,12 @@ main #create_gifo {
     max-width: 12rem;
     height: 8rem;
     background: url("../assets/icons/bg_camera.svg") no-repeat left center, url("../assets/icons/bg_light.svg") no-repeat right center;
-    background-size: 70%, 45%;
+    background-size: 60%, 38%;
   }
 }
 @media screen and (min-width: 768px) and (min-width: 992px) {
   main #create_gifo .camera {
+    width: 10rem;
     left: -35%;
   }
 }
@@ -745,14 +746,54 @@ main #create_gifo article video, main #create_gifo article img {
   opacity: 0;
 }
 main #create_gifo article .message {
+  color: #572ee5;
+  background-color: #fefefe;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  width: 100% !important;
   height: 100%;
+  z-index: 2;
 }
-main #create_gifo article .message::after {
-  content: "mensaje de prueba";
+main #create_gifo article .message h1 {
+  margin: 0;
+  border: 0;
+  padding: 1rem;
+}
+main #create_gifo article .message h1.loader::before {
+  content: url("../assets/icons/loader.svg");
+  animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+main #create_gifo article .message h1.success::before {
+  content: url("../assets/icons/check.svg");
+}
+main #create_gifo article .message p {
+  margin: 0;
+  border: 0;
+  padding: 1rem;
+}
+main #create_gifo article .message img {
+  display: block;
+}
+main #create_gifo article .message.bgColor {
+  color: #fefefe;
+  background-color: #572ee5;
+  position: absolute;
+  top: 15%;
+  bottom: 15%;
+  left: 20%;
+  right: 20%;
+  width: auto !important;
+  height: auto !important;
+  opacity: 0.6;
 }
 main #create_gifo:target {
   display: flex;
@@ -786,6 +827,11 @@ main #create_gifo .menu li {
 main #create_gifo .menu a {
   position: absolute;
   right: 2.5%;
+  z-index: 1;
+  border-bottom: 0.2rem solid transparent;
+}
+main #create_gifo .menu a:hover {
+  border-color: #33c9ca;
 }
 main #create_gifo .menu .active {
   color: #fefefe;
@@ -971,8 +1017,8 @@ main .fav.active {
   text-align: center;
   /*Social networks*/
 }
-#footer a {
-  font-weight: bold;
+#footer .special {
+  color: #333;
 }
 #footer .social {
   margin: 3rem auto;

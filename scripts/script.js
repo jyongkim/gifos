@@ -14,26 +14,30 @@
     let totalGifs = [], totalFavs = []
 /*	Event areas	*/
 	//	Navigation elements.
-    const menuBtn	= document.querySelector('#menu');
-    const menuList	= document.querySelector('.menu');
-    const menuItem	= document.querySelectorAll('.menu li');
-    const prevItem	= document.querySelector('section:last-child > .prev');
-    const nextItem	= document.querySelector('section:last-child > .next');
+    const menuBtn	= document.querySelector('#menu'); // Botón para abrir el menú.
+    const menuList	= document.querySelector('.menu'); // Lista con los hipervículos.
+    const menuItem	= document.querySelectorAll('.menu li'); // Array de los ítems de la lista. Para marcarlos como activos.
+    const prevItem	= document.querySelector('section:last-child > .prev'); // Botón anterior de navegación del área trending.
+    const nextItem	= document.querySelector('section:last-child > .next'); // Botón siguiente de navegación del área trending.
+    const modeItem  = document.querySelector('#mode'); // El input oculto de tipo checkbox.
+    const modeLabel = document.querySelector('nav label'); // Etiqueta vinculada al input anterior.
+    
     //	Search form.
-    const frmSearch	= document.querySelector('#search')
-    const textField = document.querySelector('#search input')
-    const dataList 	= document.querySelector('#suggestion')
+    const frmSearch	= document.querySelector('#search') // Formulario ('submit').
+    const textField = document.querySelector('#search input') // Campo de búsqueda ('input').
+    const dataList 	= document.querySelector('#suggestion') // Lista desplegable ('click')
     //	Results area.
-    const titleArea = document.querySelector('section h1')
-    const gifsArea 	= document.querySelector('#results')
-    const pageArea 	= document.querySelector('#pagination')
-    const trendArea = document.querySelector('#trending');
+    const titleArea = document.querySelector('section h1') // Área de las palabras buscadas.
+    const gifsArea 	= document.querySelector('#results') // Área donde se cargan los gifs.
+    const pageArea 	= document.querySelector('#pagination') // Área de los totales y la cantidad de páginas.
+    const trendArea = document.querySelector('#trending'); // Área trending topic.
     //	Recording section.
-    const stageArea	= document.querySelectorAll('#create_gifo .menu li');
+    const stageArea	= document.querySelectorAll('#create_gifo .menu li'); // Etapas de la grabación.
     const gifBtn 	= document.querySelector('#create_gifo button');
     const gifMedia 	= document.querySelector('#create_gifo article video');
     const gifView	= document.querySelector('#create_gifo article img');
     const recAgain	= document.querySelector('#create_gifo .menu a');
+    const recMsg    = document.querySelector('#create_gifo .message');
     //	Favorites section.
     const favArea 	= document.querySelector('#favorites div');
     const noFavs 	= document.querySelector('#favorites .noItems');
@@ -51,7 +55,7 @@
                 loadStorage();
                 userActions();
         }	)	)	};
-	//	Constructors.
+	//	Components. Partes que se van a insentar dentro del HTML.
 		//	Search results.
             const showGifs = (item, type) => (
                 `<article id="${type == 'result' ? item.id : type + item.id}" 
@@ -140,35 +144,64 @@
 			    recAgain.innerHTML = `Repetir captura`;
             }
         //	Gifs creation.
+            const showMsg = (type) => {
+                // Message selection.
+                switch(type) {
+                    case 1:
+                        recMsgTitle = `Aquí podrás crear tus propios <span class="special">GIFOS</span>`
+                        recMsgText =
+                        `¡Crea tu GIFO en sólo 3 pasos! <br> (sólo necesitas una cámara para grabar un video)`
+                    break;
+                    case 2:
+                        recMsgTitle = `¿Nos das acceso a tu cámara?`
+                        recMsgText = `El acceso a tu cámara será validado sólo <br> por el tiempo en el que estés creando el GIFO.`
+                    break;
+                    case 3:
+                        recMsgTitle = `class="loader"`;
+                        recMsgText = `Estamos subiendo tu GIFO.`
+                    break;
+                    case 4:
+                        recMsgTitle = `class="success"`
+                        recMsgText = `GIFO subido con éxito.`
+                    break;
+                }
+                // Evalua la etapa y coloca el texto o clase en consecuencia
+                recMsg.innerHTML =
+                `<h1 ${type >= 3 ? recMsgTitle : '' }>
+                    ${type < 3 ? recMsgTitle : ''}
+                </h1>
+                <p>${recMsgText}</p>`
+                type >=3 ? recMsg.classList.add('bgColor') : recMsg.classList.remove('bgColor');
+            }
 			const setPhase = (type) => {
 				//	Recording stages.
 					switch(phase){
 						case 1:
 							startGif();	
-							gifBtn.innerHTML = 'Grabar';
-							gifMedia.classList.add('show'); 
-							gifView.classList.remove('show'); 
+                            gifBtn.innerHTML = 'Grabar';
+                            showMsg(2)
 							break;
 						case 2:
-							recGif(); 
-							gifBtn.innerHTML = 'Finalizar';
+                            recGif(); 
+                            recMsg.style.display = 'none';
+                            gifBtn.innerHTML = 'Finalizar';
 							timeStart();
 							break;
 						case 3:
 							stopGif(); 
-							gifBtn.innerHTML = 'Subir';
-							gifMedia.classList.toggle('show');
-							gifView.classList.toggle('show');
+                            gifBtn.innerHTML = 'Subir';
+							gifMedia.classList.add('show'); 
+                            gifView.classList.remove('show');
 							timeStop();
 							break;
 						case 4:
-							question = confirm('¿deseas subir el GIF?')
-								question? uploadGif(): null 		
-								gifBtn.innerHTML = 'Comenzar'
-								gifMedia.classList.toggle('show'); 
-								gifView.classList.toggle('show'); 
-								phase = 1;
-								type = false;
+                            recMsg.style.display = 'grid';
+							uploadGif()		
+							gifBtn.innerHTML = 'Comenzar'
+							gifMedia.classList.toggle('show'); 
+							gifView.classList.toggle('show'); 
+							phase = 1;
+							type = false;
 							break;
                     }
                 //	Class assignment.
@@ -200,8 +233,13 @@
     	//	Trending elements.
 		window.addEventListener( 'load', () => { 
 			url = `${trendURL}?api_key=${apiKey}&limit=${limit}&rating=g`;
-			fetchAPI(url, trendArea, showGifs);
-		}	)
+            fetchAPI(url, trendArea, showGifs);
+            localStorage.getItem('mode') == 'false' ? modeItem.checked = true : modeItem.checked = false;
+            showMsg(1) // Fase 1 para el proceso de grabación.
+        }	)
+        // Select mode.
+        modeLabel.addEventListener('click', () => window.localStorage.setItem('mode', modeItem.checked));
+
 	// 	Saved elements.
 		const loadStorage = () =>{
 			favArea.innerHTML = ``; 
@@ -278,6 +316,7 @@
         recAgain.addEventListener( 'click', () => {
             phase = 1;
             setPhase(false);
+            recAgain.innerHTML = "";
         }	)
         gifBtn.addEventListener( 'click', () => {
             phase < 4 ? phase++ : phase = 1;
@@ -342,7 +381,7 @@
     //	Upload recording.
         async function uploadGif() {
         //	Starting the upload.
-            alert("***Comenzando la subida.***");
+            showMsg(3)
             const formData = new FormData();
             formData.append("file", gifSrc, "api_Gifo.gif");
                 const params = {
@@ -353,7 +392,7 @@
         // 	Query upload URL.
             const data = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
             console.log(await data);
-            alert("***¡La subida fue exitosa!***");
+            showMsg(4)
             id = data.data.id;
             item = data.data;
             addStorage(id, 'gif_');
