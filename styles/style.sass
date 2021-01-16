@@ -186,7 +186,7 @@ nav
 	/*Dropdown menu*/
 	.open
 		display: block
-		opacity: .8
+		opacity: .9
 		@media screen and (min-width: $md)
 			display: flex
 			padding: 0
@@ -560,6 +560,22 @@ main
 				position: absolute
 				top: .5rem
 				right: .5rem
+				a
+					position: relative
+					z-index: 2
+				.max
+					position: absolute
+					right: -1rem
+					top: -1rem
+					width: 400px
+					height: 400px
+					opacity: 0
+					z-index: 1
+					@media screen and (min-width: $md)
+						position: static
+						width: auto
+						height: auto
+						opacity: 1
 			p
 				max-width: 70%
 				+normalize(0, none, .2rem)
@@ -652,7 +668,7 @@ main
 			@media screen and (min-width: $md)
 				
 			li
-				+mode($color, $bg_color)
+				+mode($color, transparent)
 				a
 					color: $color
 				&:first-child

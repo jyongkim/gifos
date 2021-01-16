@@ -404,7 +404,7 @@ nav .menu li:last-child.active a {
 }
 nav .open {
   display: block;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 @media screen and (min-width: 768px) {
   nav .open {
@@ -941,6 +941,27 @@ main article:not(.active) .hidden .social {
   top: 0.5rem;
   right: 0.5rem;
 }
+main article:not(.active) .hidden .social a {
+  position: relative;
+  z-index: 2;
+}
+main article:not(.active) .hidden .social .max {
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  width: 400px;
+  height: 400px;
+  opacity: 0;
+  z-index: 1;
+}
+@media screen and (min-width: 768px) {
+  main article:not(.active) .hidden .social .max {
+    position: static;
+    width: auto;
+    height: auto;
+    opacity: 1;
+  }
+}
 main article:not(.active) .hidden p {
   max-width: 70%;
   margin: 0;
@@ -1071,7 +1092,7 @@ main .fav.active {
 }
 #mode:checked ~ nav .menu li {
   color: #ccc;
-  background-color: #333;
+  background-color: transparent;
 }
 #mode:checked ~ nav .menu li a {
   color: #ccc;
