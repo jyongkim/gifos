@@ -39,11 +39,11 @@
     const recAgain	= document.querySelector('#create_gifo .menu a'); // El hipervículo que vuelve a la etapa 1.
     const recMsg    = document.querySelector('#create_gifo .message'); // El mensaje que aparece en las etapas de grabación.
     //	Favorites section.
-    const favArea 	= document.querySelector('#favorites div'); // Area de favoritos
-    const noFavs 	= document.querySelector('#favorites .noItems'); // ärea sin favoritos
+    const favArea 	= document.querySelector('#favorites div'); // Área de favoritos.
+    const noFavs 	= document.querySelector('#favorites .noItems'); // Área sin favoritos.
     //	Mis Gifos section.
-    const myGifs	= document.querySelector('#my_gifos div') // Area de mis Gifos
-    const noGifs	= document.querySelector('#my_gifos .noItems') // Area sin Gifos.
+    const myGifs	= document.querySelector('#my_gifos div') // Área de Mis Gifos.
+    const noGifs	= document.querySelector('#my_gifos .noItems') // Área sin Mis Gifos.
 /*	Functions and methods	*/
 	//	Giphy API query.
     async function fetchAPI(url, editArea, buildArea, type = 'result') { 
