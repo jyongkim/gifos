@@ -93,7 +93,7 @@
                             <li><strong>Resultados</strong>${total}</li>
                             <li>
                                 <strong>Paginas</strong> 
-                                ${ ( actual = (offset / 12) + 1 ) <= (pages = Math.ceil(total / 12)) ?actual : pages } / ${ pages }
+                                ${ ( actual = (offset / 12) + 1 ) <= (pages = Math.ceil(total / 12)) ? actual : pages } / ${ pages }
                             </li>
                         </ul>
                         <button class="button">
