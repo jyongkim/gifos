@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo del proyecto Gifos</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/making-of.css">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="#busqueda">Búsqueda</a></li>
+            <li><a href="#resultados">Resultados</a></li>
+            <li><a href="#create_gifo">Creación de GIFs</a></li>
+            <li><a href="#storage">Elementos guardados</a></li>
+            <li><a href="https://github.com/jyongkim/gifos" target="_blank" title="GitHub">+</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1></h1>
+        <p></p>
+    </header>
+    <main>
+        <section id="busqueda">
+            <header class="header">
+                <h1>Formulario de búsqueda</h1>
+            </header>
+            <article id="header">
+                <form id="search">
+                    <input
+                      id="textField"
+                      name="textField"
+                      type="search"
+                      list="suggestion"
+                      minlength="1"
+                      maxlength="50"
+                      autocomplete="off"
+                      required />
+                    <label for="textField">Buscar GIFOS y más.</label>
+                    <select id="suggestion" multiple></select>
+                    <button class="icon search"></button>
+                  </form>
+            </article>
+            <aside>
+                <ul>
+                    <li> Seleccione la barra para realizar una búsqueda.</li>
+                    <li>Cuando ingrese una palabra aparecerán las sugerencias.</li>
+                    <li>Al seleccionar alguna, hacer click en la lupa o simplemente presionar <em>Enter</em> y se efectuará la búsqueda.</li>
+                </ul>
+                <label class="button" for="verBusqueda">Ver más...</label>
+                <input type="checkbox" id="verBusqueda">
+                <pre class="mostrar">
+    const frmSearch	= document.querySelector('#search') // Formulario ('submit').
+    const textField = document.querySelector('#search input') // Campo de búsqueda ('input').
+    const dataList 	= document.querySelector('#suggestion') // Lista desplegable ('click')
+    
+    textField.addEventListener(
+        'input', () => {
+            if(textField.checkValidity()){
+                termino = textField.value;
+                url = `${tagsURL}${termino}?api_key=${apiKey}&lang=es`;
+                dataList.innerHTML = ``;
+                fetchAPI(url, dataList, showOptions);
+    }	}	)	;
+    dataList.addEventListener(
+        'click', () => {
+            textField.value = dataList.value 
+            frmSearch.querySelector('button').click()
+            textField.focus();
+    }	)
+                </pre>
+            </aside>
+        </section>
+        <section id="resultados">
+            <header class="header">
+                <h1>Resultados y páginas</h1>
+            </header>
+            <div class="container">
+                <article>
+                    <img src="https://media3.giphy.com/media/8cJ1KsbYbdJoAJeQHf/200_d.gif?cid=76b75f680360171e66f3a97322478e725e48969183800bcb&rid=200_d.gif"
+                    alt="not found">
+                    <div class="hidden">
+                        <p>
+                            <strong>Anonymous</strong>
+                            Unknown
+                            <span class="social">
+                                <a href="" class="icon fav"></a>
+                                <a href="" class="icon download"></a>
+                                <a href="" class="icon max"></a>
+                            </span>
+                        </p>
+                    </div>
+                </article>
+                <article class="selected">
+                    <img src="https://media3.giphy.com/media/8cJ1KsbYbdJoAJeQHf/200_d.gif?cid=76b75f680360171e66f3a97322478e725e48969183800bcb&rid=200_d.gif"
+                    alt="not found">
+                    <div class="hidden">
+                        <p>
+                            <strong>Anonymous</strong>
+                            Unknown
+                            <span class="social">
+                                <a href="" class="icon fav"></a>
+                                <a href="" class="icon download"></a>
+                                <a href="" class="icon max"></a>
+                            </span>
+                        </p>
+                    </div>
+                </article>
+            </div>
+            <aside>
+                <ul>
+                    <li>Una vez realizada la búsqueda aparecerán en pantalla los resultados en grupos de doce imágenes por página.</li>
+                    <li>Al posicionarse sobre cualquiera de las imágenes aparecerán las opciones de <em>Agregar a favoritos, Descargar, Maximizar</em></li>
+                    <li>También, al final de la página, aparecerán la cantidad total de resultados y cuántas páginas en total podemos visualizar.</li>
+                    <li><strong>Aclaración:</strong> todas las imágenes se visualizan en la misma página sin opciones de navegación, es decir, que a medida que vayamos cargando más imágenes las anteriores permanecerán en pantalla.</li>
+                </ul>
+                <label for="verResult">Ver Más...</label>
+                <input type="checkbox" id="verResult">
+                <pre class="mostrar">
+const showPages = (url, total) => {
+    if (url.includes('search') && total >= 1) { 
+        pageArea.innerHTML =
+            `<ul>
+                <li><strong>Resultados</strong>${total}</li>
+                <li>
+                    <strong>Paginas</strong> 
+                    ${ ( actual = (offset / 12) + 1 ) <= (pages = Math.ceil(total / 12)) ? actual : pages } / ${ pages }
+                </li>
+            </ul>
+            <button class="button">
+                ${ offset + limit <= total ? "VER MÁS...": "NO HAY MÁS RESULTADOS." }
+            </button>`
+    } else if (url.includes('search')){
+        noResults(pageArea, 'results');
+    }
+}
+pageArea.onsubmit =  (e) => {
+    e.preventDefault();
+    offset += 12;
+    url = `${searchURL}?api_key=${apiKey}&q=${termino}&limit=${limit}&offset=${offset}&rating=g&lang=es`
+    fetchAPI(url, gifsArea, showGifs);
+}
+                </pre>
+            </aside>
+        </section>
+        <section id="create_gifo">
+            <header class="header">
+                <h1>Proceso de creación de GIF.</h1>
+            </header>
+            <article>
+                <div class="camera"></div>
+                <video class="show"></video>
+                <img />
+                <div class="message"></div>
+              </article>
+              <div>
+                <ul class="menu">
+                  <li>1</li>
+                  <li>2</li>
+                  <li>3</li>
+                  <a href="#create_gifo"></a>
+                  <div class="tape"></div>
+                </ul>
+                <button class="button">Crear</button>
+              </div>
+            <aside>
+                <ul>
+                    <li>Para poder crear un GIF debemos contar con una webcam</li>
+                    <li>Cumpliendo este requisito, al comenzar, la aplicación nos solicitará acceso a la misma</li>
+                    <li>Al iniciar la grabación comenzará a cronometrarse el tiempo</li>
+                    <li>Una vez finalizada la misma podemos elegir entre subir nuestro GIF creado recientemente o repetir la grabación</li>
+                    <li>En caso de subir la grabación se guardará la misma en la sección Mis Gifos.</li>
+                    <li><strong>Aclaración: </strong> durante el proceso se nos notificará los pasos a seguir mediante un texto en pantalla. También podremos ver una vista previa de la grabación al finalizar la misma</li>
+                </ul>
+                <label class="button" for="verCrear">Ver Más...</label>
+                <input type="checkbox" id="verCrear">
+                <pre class="mostrar">
+
+                    //  Gifs creation.
+                    const showMsg = (type) => {
+                        // Message selection.
+                        switch(type) {
+                            case 1:
+                                recMsgTitle = `Aquí podrás crear tus propios <span class="special">GIFOS</span>`
+                                recMsgText =
+                                `¡Crea tu GIFO en sólo 3 pasos! <br> (sólo necesitas una cámara para grabar un video)`
+                            break;
+                            case 2:
+                                recMsgTitle = `¿Nos das acceso a tu cámara?`
+                                recMsgText = `El acceso a tu cámara será validado sólo <br> por el tiempo en el que estés creando el GIFO.`
+                            break;
+                            case 3:
+                                recMsgTitle = `class="loader"`;
+                                recMsgText = `Estamos subiendo tu GIFO.`
+                            break;
+                            case 4:
+                                recMsgTitle = `class="success"`
+                                recMsgText = `GIFO subido con éxito.`
+                            break;
+                        }
+                        // Evalua la etapa y coloca el texto o clase en consecuencia
+                        recMsg.innerHTML =
+                        `&lt;h1 ${type >= 3 ? recMsgTitle : '' }>
+                            ${type < 3 ? recMsgTitle : ''}
+                        &lt;/h1>
+                        &lt;p>${recMsgText}&lt;/p>`
+                        type >=3 ? recMsg.classList.add('bgColor') : recMsg.classList.remove('bgColor');
+                    }
+                    const setPhase = (type) => {
+                        //  Recording stages.
+                            switch(phase){
+                                case 1:
+                                    startGif(); 
+                                    gifBtn.innerHTML = 'Grabar';
+                                    gifMedia.classList.add('show'); 
+                                    gifView.classList.remove('show');
+                                    showMsg(2)
+                                    break;
+                                case 2:
+                                    recGif(); 
+                                    recMsg.style.display = 'none';
+                                    gifBtn.innerHTML = 'Finalizar';
+                                    timeStart();
+                                    break;
+                                case 3:
+                                    stopGif(); 
+                                    gifBtn.innerHTML = 'Subir';
+                                    timeStop();
+                                    gifMedia.classList.toggle('show'); 
+                                    gifView.classList.toggle('show'); 
+                                    break;
+                                case 4:
+                                    recMsg.style.display = 'grid';
+                                    uploadGif()     
+                                    gifBtn.innerHTML = 'Comenzar'
+                                    phase = 1;
+                                    type = false;
+                                    break;
+                            }
+                        //  Class assignment.
+                            stageArea[phase - 1].classList.add('active')
+                            switch (type){
+                                case true:
+                                    phase > 1 ? stageArea[phase - 2].classList.remove('active') : null
+                                    break;
+                                case false:
+                                    for(i = 0 ; i < stageArea.length; i++){
+                                        stageArea[i].classList.remove('active');
+                                    }
+                                    stageArea[phase - 1].classList.add('active');
+                                    break;
+                            }
+                    }
+            /*Gifs creation*/
+                //  Recording process.
+                recAgain.addEventListener( 'click', () => {
+                    phase = 1;
+                    setPhase(false);
+                    recAgain.innerHTML = "";
+                }   )
+                gifBtn.addEventListener( 'click', () => {
+                    phase < 4 ? phase++ : phase = 1;
+                    setPhase(true);
+                }   )
+            //  Check the webcam.
+                async function startGif() {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        audio: false,
+                        video: { max: 480 }
+                    }   );
+                    gifMedia.srcObject = stream;
+                    await gifMedia.play();
+                }
+            //  Start recording.
+                async function recGif() {
+                    const stream = gifMedia.srcObject;
+                    videoRecorder = new RecordRTCPromisesHandler(stream, {
+                        type: "video",
+                        mimeType: "video/webm; codecs=vp8",
+                        disableLogs: true,
+                        videoBitsPerSecond: 128000,
+                        frameRate: 30,
+                        quality: 10,
+                        width: 480,
+                        hidden: 240
+                    });
+                    gifRecorder = new RecordRTCPromisesHandler(stream, {
+                        disableLogs: true,
+                        type: "gif",
+                        frameRate: 1,
+                        quality: 10,
+                        width: 480,
+                        hidden: 240
+                    });
+                    await videoRecorder.startRecording();
+                    await gifRecorder.startRecording();
+                    videoRecorder.stream = stream;
+                }
+            //  Stop Recording
+                async function stopGif() {
+                // Content upload.
+                    await videoRecorder.stopRecording();
+                    await gifRecorder.stopRecording();
+                    const videoBlob = await videoRecorder.getBlob();
+                    const gifBlob = await gifRecorder.getBlob();
+                //  Output format.
+                    gifMedia.src = URL.createObjectURL(videoBlob);
+                    videoRecorder.stream.getTracks().forEach(t => t.stop());
+                    gifMedia.srcObject = null;
+                //  Reset parameters.
+                    await videoRecorder.reset();
+                    await videoRecorder.destroy();
+                    await gifRecorder.reset();
+                    await gifRecorder.destroy();
+                //  Content cleaning.
+                    gifSrc = await gifBlob;
+                    gifView.src = URL.createObjectURL(await gifBlob);
+                    gifRecorder = null;
+                    videoRecorder = null;
+                }
+            //  Upload recording.
+                async function uploadGif() {
+                //  Starting the upload.
+                    showMsg(3)
+                    const formData = new FormData();
+                    formData.append("file", gifSrc, "api_Gifo.gif");
+                        const params = {
+                            method: "POST",
+                            body: formData,
+                            json: true
+                    };
+                //  Query upload URL.
+                    const data = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
+                    console.log(await data);
+                    showMsg(4)
+                    id = data.data.id;
+                    item = data.data;
+                    addStorage(id, 'gif_');
+                    gifMedia.classList.toggle('show');
+                    gifView.classList.toggle('show');
+                    phase = 1;
+                    setPhase(false);
+                    }
+            //  API query - Gif_Id.
+                const fetchURL = async(url, params = null) => {
+                    const fetchData = await fetch(url, params);
+                    const response = await fetchData.json();
+                    return response     
+                };
+                </pre>
+            </aside>
+        </section>
+        <section id="storage">
+            <header class="header">
+                <h1>Elementos Guardados</h1>
+            </header>
+            <div class="container">
+                <article>
+                    <img src="https://media3.giphy.com/media/8cJ1KsbYbdJoAJeQHf/200_d.gif?cid=76b75f680360171e66f3a97322478e725e48969183800bcb&rid=200_d.gif"
+                    alt="not found">
+                    <div class="hidden">
+                        <p>
+                            <strong>Anonymous</strong>
+                            Unknown
+                            <span class="social">
+                                <a href="" class="icon fav"></a>
+                                <a href="" class="icon download"></a>
+                                <a href="" class="icon max"></a>
+                            </span>
+                        </p>
+                    </div>
+                </article>
+                <article class="selected">
+                    <img src="https://media3.giphy.com/media/8cJ1KsbYbdJoAJeQHf/200_d.gif?cid=76b75f680360171e66f3a97322478e725e48969183800bcb&rid=200_d.gif"
+                    alt="not found">
+                    <div class="hidden">
+                        <p>
+                            <strong>Anonymous</strong>
+                            Unknown
+                            <span class="social">
+                                <a href="" class="icon fav active"></a>
+                                <a href="" class="icon download"></a>
+                                <a href="" class="icon max"></a>
+                            </span>
+                        </p>
+                    </div>
+                </article>
+                <div></div>
+                <article>
+                    <img src="https://media3.giphy.com/media/8cJ1KsbYbdJoAJeQHf/200_d.gif?cid=76b75f680360171e66f3a97322478e725e48969183800bcb&rid=200_d.gif"
+                    alt="not found">
+                    <div class="hidden">
+                        <p>
+                            <strong>Anonymous</strong>
+                            Unknown
+                            <span class="social">
+                                <a href="" class="icon trash"></a>
+                                <a href="" class="icon download"></a>
+                                <a href="" class="icon max"></a>
+                            </span>
+                        </p>
+                    </div>
+                </article>
+                <article class="selected">
+                    <img src="https://media3.giphy.com/media/8cJ1KsbYbdJoAJeQHf/200_d.gif?cid=76b75f680360171e66f3a97322478e725e48969183800bcb&rid=200_d.gif"
+                    alt="not found">
+                    <div class="hidden">
+                        <p>
+                            <strong>Anonymous</strong>
+                            Unknown
+                            <span class="social">
+                                <a href="" class="icon trash"></a>
+                                <a href="" class="icon download"></a>
+                                <a href="" class="icon max"></a>
+                            </span>
+                        </p>
+                    </div>
+                </article>
+            </div>
+            <aside>
+                <ul>
+                    <li>Cuando creamos un GIF o hacemos 'click' en el botón like, se agregará el elemento al almacenamiento de la página</li>
+                    <li>Si volvemos a presionar el botón (like) podemos remover el elemento previamente agregado. Lo mismo aplica para el botón de remover (trash)</li>
+                    <li>A la vez, también se guarda la configuración del modo (diurno/nocturno)</li>
+                    <li><strong>Aclaración: </strong> debemos contar con conexión a Internet para poder visualizar los elementos mencionados anteriormente.</li>
+                </ul>
+                <label class="button" for="verSaves">Ver Más...</label>
+                <input type="checkbox" id="verSaves">
+                <pre class="mostrar">	
+// 	Saved elements.
+const loadStorage = () =>{
+    favArea.innerHTML = ``; 
+    myGifs.innerHTML = ``;
+    if(localStorage.length != 0){
+        totalGifs = [];
+        totalFavs = [];
+        for ( i = 0; i < localStorage.length; i++ ){  
+                id = localStorage.key(i);
+                item = JSON.parse(localStorage.getItem(id));
+                if (id.includes('gif_')) {
+                    totalGifs.push(id);
+                    myGifs.innerHTML += showGifs(item, 'gif_')
+                }
+                if (id.includes('fav_')){
+                    totalFavs.push(id);
+                    favArea.innerHTML += showGifs(item, 'fav_');
+    }	}	} 	 
+    totalGifs.length == 0 ? noResults(noGifs, 'gifs') : noGifs.innerHTML = ``;
+    totalFavs.length == 0 ? noResults(noFavs, 'favs') : noFavs.innerHTML = ``;
+    
+    likeHit = document.querySelectorAll('.fav');
+    binHit	= document.querySelectorAll('.trash');
+    openHit = document.querySelectorAll('.max');
+    }
+//	Add item.
+    const addStorage = async (id, type) => {
+        const response = await fetchURL(`${idURL+id}?api_key=${apiKey}`);
+        const data = JSON.stringify(response.data);
+        localStorage.setItem(type + id, data);
+    } 
+//	Remove item.
+    const remStorage = (id) => {
+        window.localStorage.removeItem( id );
+    }
+                </pre>
+            </aside>
+        </section>
+        <section>
+            <header class="header">
+                <h1>Glosario</h1>
+            </header>
+            <ul class="container">
+                <li><strong>Iconos</strong>
+                    <ul class="gloss">
+                        <li> <a class="icon fav" href=""></a> Favoritos </li>
+                        <li> <a class="icon download" href=""></a> Descargar </li>
+                        <li> <a class="icon trash" href=""></a> Eliminar</li>
+                        <li> <a class="icon max" href=""></a> Maximizar</li>
+                        <li> <a class="icon close" href=""></a> Cerrar</li>
+                        <li> <a class="icon search" href=""></a> Buscar</li>
+                    </ul>
+                </li>
+                <li><strong>Software</strong>
+                    <ul>   
+                        <li><a href="https://code.visualstudio.com" target="_blank">VScode</a></li>
+                        <li><a href="https://sass-lang.com" target="_blank">Sass</a></li>
+                        <li><a href="https://www.WebRTC-Experiment.com/RecordRTC.js" target="_blank">WebRTC</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer id="footer">
+        <address>
+            <strong>&copy; Jonathan Kim | </strong>
+            <a href="mailto:jonathankim86@gmail.com">jonathankim86@gmail.com</a>
+        </address>
+    </footer>
+</body>
+</html>

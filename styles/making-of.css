@@ -1,0 +1,65 @@
+#header, #header form, section > article{
+    width: 100%;
+    max-width: 1140px !important;    
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1rem));
+    gap: 1rem;
+    position: relative;
+}
+.container > div{
+    position:absolute;
+    top: -.5rem;
+    bottom: 0;
+    left: calc(50% + .1rem);
+    background-color: #333;
+    width: .2rem;
+}
+#create_gifo > div{
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+}
+section:last-child{
+    text-align: left;
+}
+.gloss .icon{
+    margin: 0
+}
+article{
+    width: 200px;
+    height: 200px;
+}
+#header input,
+#header select{
+    width: 100%;
+    margin: 0;
+}
+#header button{
+    top: .2rem;
+}
+.button{
+    max-width:300px;
+    display: block;
+    margin: .5rem auto !important;
+    text-align: center;
+}
+aside{
+    text-align: left;
+}
+aside input[type="checkbox"]{
+    display: none;
+}
+aside input[type="checkbox"] + .mostrar{
+    display: none;
+}
+aside input[type="checkbox"]:checked + .mostrar{
+    display: block;
+}
+aside pre{
+    color: #ccc;
+    background-color: #333;
+    padding: 1rem;
+    overflow: auto;
+}
