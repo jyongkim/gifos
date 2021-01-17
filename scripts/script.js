@@ -33,17 +33,17 @@
     const trendArea = document.querySelector('#trending'); // Área trending topic.
     //	Recording section.
     const stageArea	= document.querySelectorAll('#create_gifo .menu li'); // Etapas de la grabación.
-    const gifBtn 	= document.querySelector('#create_gifo button');
-    const gifMedia 	= document.querySelector('#create_gifo article video');
-    const gifView	= document.querySelector('#create_gifo article img');
-    const recAgain	= document.querySelector('#create_gifo .menu a');
-    const recMsg    = document.querySelector('#create_gifo .message');
+    const gifBtn 	= document.querySelector('#create_gifo button'); // Botón que cambia de texto.
+    const gifMedia 	= document.querySelector('#create_gifo article video'); // Video.
+    const gifView	= document.querySelector('#create_gifo article img'); // Imágen.
+    const recAgain	= document.querySelector('#create_gifo .menu a'); // El hipervículo que vuelve a la etapa 1.
+    const recMsg    = document.querySelector('#create_gifo .message'); // El mensaje que aparece en las etapas de grabación.
     //	Favorites section.
-    const favArea 	= document.querySelector('#favorites div');
-    const noFavs 	= document.querySelector('#favorites .noItems');
+    const favArea 	= document.querySelector('#favorites div'); // Area de favoritos
+    const noFavs 	= document.querySelector('#favorites .noItems'); // ärea sin favoritos
     //	Mis Gifos section.
-    const myGifs	= document.querySelector('#my_gifos div')
-    const noGifs	= document.querySelector('#my_gifos .noItems')
+    const myGifs	= document.querySelector('#my_gifos div') // Area de mis Gifos
+    const noGifs	= document.querySelector('#my_gifos .noItems') // Area sin Gifos.
 /*	Functions and methods	*/
 	//	Giphy API query.
     async function fetchAPI(url, editArea, buildArea, type = 'result') { 
@@ -179,6 +179,8 @@
 						case 1:
 							startGif();	
                             gifBtn.innerHTML = 'Grabar';
+                            gifMedia.classList.add('show'); 
+                            gifView.classList.remove('show');
                             showMsg(2)
 							break;
 						case 2:
@@ -190,16 +192,14 @@
 						case 3:
 							stopGif(); 
                             gifBtn.innerHTML = 'Subir';
-							gifMedia.classList.add('show'); 
-                            gifView.classList.remove('show');
-							timeStop();
+                            timeStop();
+                            gifMedia.classList.toggle('show'); 
+							gifView.classList.toggle('show'); 
 							break;
 						case 4:
                             recMsg.style.display = 'grid';
 							uploadGif()		
 							gifBtn.innerHTML = 'Comenzar'
-							gifMedia.classList.toggle('show'); 
-							gifView.classList.toggle('show'); 
 							phase = 1;
 							type = false;
 							break;
@@ -262,7 +262,7 @@
 			totalFavs.length == 0 ? noResults(noFavs, 'favs') : noFavs.innerHTML = ``;
 			
 			likeHit = document.querySelectorAll('.fav');
-			binHit	= document.querySelectorAll('.trash')
+			binHit	= document.querySelectorAll('.trash');
 			openHit = document.querySelectorAll('.max');
             }
         //	Add item.
@@ -270,12 +270,10 @@
 				const response = await fetchURL(`${idURL+id}?api_key=${apiKey}`);
 				const data = JSON.stringify(response.data);
 				localStorage.setItem(type + id, data);
-				return loadStorage();
 			} 
 		//	Remove item.
 			const remStorage = (id) => {
 				window.localStorage.removeItem( id );
-				return loadStorage()
             }
     //	User elements.
 	//	Search suggestions.
@@ -396,6 +394,10 @@
             id = data.data.id;
             item = data.data;
             addStorage(id, 'gif_');
+            gifMedia.classList.toggle('show');
+            gifView.classList.toggle('show');
+            phase = 1;
+            setPhase(false);
             }
     //	API query - Gif_Id.
         const fetchURL = async(url, params = null) => {
@@ -403,20 +405,18 @@
             const response = await fetchData.json();
             return response		
         };
+
 /* 	User actions */
 	//	Action buttons.
     const userActions = () => {			
         likeHit.forEach( (like) => like.addEventListener( 'click', () => { 
-            totalItems(like);
-            box.parentNode.parentNode.id == 'favorites' ? location.reload() : null
-            box.id.includes('fav_') ? remStorage(id) : 
-            localStorage.getItem('fav_'+ box.id) ? remStorage('fav_' + box.id) : 
-                addStorage(box.id, 'fav_');
-            like.classList.toggle('active');
+            totalItems(like); // Obtener elemnto padre (article) e imagen 
+            box.classList.contains('favorite') ? remStorage(box.id) : like.classList.toggle('active') ? 
+                    addStorage(box.id, 'fav_') : remStorage('fav_' + box.id);
+            box.parentNode.id != 'results' ? window.location.reload() : null
         }	)	)
         binHit.forEach( bin => bin.addEventListener( 'click', () => {
             totalItems(bin);
-            box.parentNode.parentNode.id == 'my_gifos' ? location.reload() : null
             remStorage(box.id)
         }	)	)	
         openHit.forEach( open  => open.addEventListener('click', (e) => {	
@@ -428,8 +428,9 @@
             nextItem.classList.toggle('selected');
         }	)	)
     }
+    /* funcion que obtiene al elemento contenedor principal (a < .social < .hidden < article(ID))*/
     const totalItems = (param) => { 
-        box = param.parentNode.parentNode.parentNode
+        box = param.parentNode.parentNode.parentNode 
         item = param.parentNode.parentNode.parentNode.querySelector('img');
     }
     nextItem.addEventListener('click', () => changeItem(nextItem,true));

@@ -377,7 +377,7 @@ nav .menu li:first-child label {
   background-color: transparent;
 }
 nav .menu li:first-child label:after {
-  content: " Diurno";
+  content: " Nocturno";
 }
 nav .menu li:last-child a {
   margin: 0;
@@ -1098,7 +1098,7 @@ main .fav.active {
   color: #ccc;
 }
 #mode:checked ~ nav .menu li:first-child label:after {
-  content: " Nocturno";
+  content: " Diurno";
 }
 #mode:checked ~ nav .menu li:last-child a:hover, #mode:checked ~ nav .menu li.active:last-child a {
   color: #333;
