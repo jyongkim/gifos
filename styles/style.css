@@ -746,6 +746,12 @@ main #create_gifo article img {
   height: 70%;
   opacity: 0;
 }
+main #create_gifo article video.show ~ .message.bgColor + .hidden {
+  display: block;
+}
+main #create_gifo article .hidden {
+  display: none;
+}
 main #create_gifo article .hidden {
   top: 0;
   right: 0;

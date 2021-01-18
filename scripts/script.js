@@ -32,6 +32,7 @@
     const pageArea 	= document.querySelector('#pagination') // Área de los totales y la cantidad de páginas.
     const trendArea = document.querySelector('#trending'); // Área trending topic.
     //	Recording section.
+    const createArea = document.querySelector('#create_gifo')
     const stageArea	= document.querySelectorAll('#create_gifo .menu li'); // Etapas de la grabación.
     const gifBtn 	= document.querySelector('#create_gifo button'); // Botón que cambia de texto.
     const gifMedia 	= document.querySelector('#create_gifo article video'); // Video.
@@ -274,8 +275,11 @@
 			const addStorage = async (id, type) => {
 				const response = await fetchURL(`${idURL+id}?api_key=${apiKey}`);
 				const data = JSON.stringify(response.data);
-                localStorage.setItem(type + id, data);
-                box.parentNode.id != 'results' ? window.location.reload() : null
+                localStorage.setItem(type + id, data);    
+                type == 'gif_' ? createArea.querySelector('a.link').setAttribute('href', response.data.images.fixed_height_downsampled.url) : null
+                if(box != undefined ){
+                    box.parentNode.id != 'results' ? window.location.reload() : null
+                }
 			} 
 		//	Remove item.
 			const remStorage = (id) => {
@@ -399,11 +403,10 @@
             console.log(await result);
             id = result.data.id;
             item = result.data;
-            addStorage(id, 'gif_');
             showMsg(4)
+            addStorage(id, 'gif_');
             gifMedia.classList.toggle('show');
             gifView.classList.toggle('show');
-            console.log(id +" "+ JSON.stringify(item))
             }
     //	API query - Gif_Id.
         const fetchURL = async(url, params = null) => {
