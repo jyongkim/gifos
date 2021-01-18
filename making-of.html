@@ -234,9 +234,11 @@
                                     recMsg.style.display = 'grid';
                                     uploadGif()     
                                     gifBtn.innerHTML = 'Comenzar'
+                                break;
+                                default:
                                     phase = 1;
                                     type = false;
-                                    break;
+                                break;
                             }
                         //  Class assignment.
                             stageArea[phase - 1].classList.add('active')
@@ -330,17 +332,15 @@
                             body: formData,
                             json: true
                     };
-                //  Query upload URL.
-                    const data = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
-                    console.log(await data);
+                // 	Query upload URL.
+                    const result = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
+                    console.log(await result);
+                    id = result.data.id;
+                    item = result.data;
                     showMsg(4)
-                    id = data.data.id;
-                    item = data.data;
                     addStorage(id, 'gif_');
                     gifMedia.classList.toggle('show');
                     gifView.classList.toggle('show');
-                    phase = 1;
-                    setPhase(false);
                     }
             //  API query - Gif_Id.
                 const fetchURL = async(url, params = null) => {
@@ -457,11 +457,15 @@ const loadStorage = () =>{
     const addStorage = async (id, type) => {
         const response = await fetchURL(`${idURL+id}?api_key=${apiKey}`);
         const data = JSON.stringify(response.data);
-        localStorage.setItem(type + id, data);
-    } 
-//	Remove item.
+        localStorage.setItem(type + id, data);    
+        type == 'gif_' ? createArea.querySelector('a.link').setAttribute('href', response.data.images.fixed_height_downsampled.url) : null
+        if(box != undefined ){
+            box.parentNode.id != 'results' ? window.location.reload() : null
+       }   } 
+<i class="orange">//    Remove item.    </i> 
     const remStorage = (id) => {
         window.localStorage.removeItem( id );
+        box.parentNode.id != 'results' ? window.location.reload() : null
     }
                 </pre>
             </aside>

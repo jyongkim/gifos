@@ -31,6 +31,9 @@ article{
     width: 200px;
     height: 200px;
 }
+.orange{
+    color: orange;
+}
 #header input,
 #header select{
     width: 100%;
