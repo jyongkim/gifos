@@ -46,7 +46,6 @@
     const myGifs	= document.querySelector('#my_gifos div') // Área de Mis Gifos.
     const noGifs	= document.querySelector('#my_gifos .noItems') // Área sin Mis Gifos.
 
-
     /*	Functions and methods	*/
 	//	Giphy API query.
     async function fetchAPI(url, editArea, buildArea, type = 'result') { 
@@ -168,7 +167,7 @@
                         recMsgText = `GIFO subido con éxito.`
                     break;
                 }
-                // Evalua la etapa y coloca el texto o clase en consecuencia
+                // Evalúa la etapa y coloca el texto o la clase en consecuencia.
                 recMsg.innerHTML =
                 `<h1 ${type >= 3 ? recMsgTitle : '' }>
                     ${type < 3 ? recMsgTitle : ''}
