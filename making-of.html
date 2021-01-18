@@ -177,9 +177,9 @@
                 <input type="checkbox" id="verCrear">
                 <pre class="mostrar">
 
-                    //  Gifs creation.
+                    <i class="orange">//  Gifs creation.</i>
                     const showMsg = (type) => {
-                        // Message selection.
+                        <i class="orange">// Message selection.</i>
                         switch(type) {
                             case 1:
                                 recMsgTitle = `Aquí podrás crear tus propios <span class="special">GIFOS</span>`
@@ -199,7 +199,7 @@
                                 recMsgText = `GIFO subido con éxito.`
                             break;
                         }
-                        // Evalua la etapa y coloca el texto o clase en consecuencia
+                        <i class="orange">// Evalúa la etapa y coloca el texto o la clase en consecuencia.</i>
                         recMsg.innerHTML =
                         `&lt;h1 ${type >= 3 ? recMsgTitle : '' }>
                             ${type < 3 ? recMsgTitle : ''}
@@ -208,7 +208,7 @@
                         type >=3 ? recMsg.classList.add('bgColor') : recMsg.classList.remove('bgColor');
                     }
                     const setPhase = (type) => {
-                        //  Recording stages.
+                        <i class="orange">//  Recording stages.</i>
                             switch(phase){
                                 case 1:
                                     startGif(); 
@@ -240,7 +240,7 @@
                                     type = false;
                                 break;
                             }
-                        //  Class assignment.
+                        <i class="orange">//  Class assignment.</i>
                             stageArea[phase - 1].classList.add('active')
                             switch (type){
                                 case true:
@@ -254,8 +254,8 @@
                                     break;
                             }
                     }
-            /*Gifs creation*/
-                //  Recording process.
+            <i class="orange">/*Gifs creation*/ </i>
+                <i class="orange">//  Recording process.</i>
                 recAgain.addEventListener( 'click', () => {
                     phase = 1;
                     setPhase(false);
@@ -265,7 +265,7 @@
                     phase < 4 ? phase++ : phase = 1;
                     setPhase(true);
                 }   )
-            //  Check the webcam.
+            <i class="orange">//  Check the webcam. </i>
                 async function startGif() {
                     const stream = await navigator.mediaDevices.getUserMedia({
                         audio: false,
@@ -274,7 +274,7 @@
                     gifMedia.srcObject = stream;
                     await gifMedia.play();
                 }
-            //  Start recording.
+            <i class="orange">//  Start recording. </i>
                 async function recGif() {
                     const stream = gifMedia.srcObject;
                     videoRecorder = new RecordRTCPromisesHandler(stream, {
@@ -299,31 +299,31 @@
                     await gifRecorder.startRecording();
                     videoRecorder.stream = stream;
                 }
-            //  Stop Recording
+            <i class="orange">//  Stop Recording </i>
                 async function stopGif() {
-                // Content upload.
+                <i class="orange">// Content upload. </i>
                     await videoRecorder.stopRecording();
                     await gifRecorder.stopRecording();
                     const videoBlob = await videoRecorder.getBlob();
                     const gifBlob = await gifRecorder.getBlob();
-                //  Output format.
+                <i class="orange">//  Output format. </i>
                     gifMedia.src = URL.createObjectURL(videoBlob);
                     videoRecorder.stream.getTracks().forEach(t => t.stop());
                     gifMedia.srcObject = null;
-                //  Reset parameters.
+                 <i class="orange">//  Reset parameters.</i>
                     await videoRecorder.reset();
                     await videoRecorder.destroy();
                     await gifRecorder.reset();
                     await gifRecorder.destroy();
-                //  Content cleaning.
+                <i class="orange">//  Content cleaning.</i>
                     gifSrc = await gifBlob;
                     gifView.src = URL.createObjectURL(await gifBlob);
                     gifRecorder = null;
                     videoRecorder = null;
                 }
-            //  Upload recording.
+            <i class="orange">//  Upload recording.</i>
                 async function uploadGif() {
-                //  Starting the upload.
+                <i class="orange">//  Starting the upload.</i>
                     showMsg(3)
                     const formData = new FormData();
                     formData.append("file", gifSrc, "api_Gifo.gif");
@@ -332,7 +332,7 @@
                             body: formData,
                             json: true
                     };
-                // 	Query upload URL.
+                <i class="orange">// 	Query upload URL.</i>
                     const result = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
                     console.log(await result);
                     id = result.data.id;
@@ -342,7 +342,7 @@
                     gifMedia.classList.toggle('show');
                     gifView.classList.toggle('show');
                     }
-            //  API query - Gif_Id.
+        <i class="orange">//  API query - Gif_Id. </i>
                 const fetchURL = async(url, params = null) => {
                     const fetchData = await fetch(url, params);
                     const response = await fetchData.json();
@@ -428,7 +428,7 @@
                 <label class="button" for="verSaves">Ver más...</label>
                 <input type="checkbox" id="verSaves">
                 <pre class="mostrar">	
-// 	Saved elements.
+<i class="orange">// 	Saved elements.</i>
 const loadStorage = () =>{
     favArea.innerHTML = ``; 
     myGifs.innerHTML = ``;
@@ -453,7 +453,7 @@ const loadStorage = () =>{
     binHit	= document.querySelectorAll('.trash');
     openHit = document.querySelectorAll('.max');
     }
-//	Add item.
+<i class="orange">//	Add item. </i>
     const addStorage = async (id, type) => {
         const response = await fetchURL(`${idURL+id}?api_key=${apiKey}`);
         const data = JSON.stringify(response.data);
