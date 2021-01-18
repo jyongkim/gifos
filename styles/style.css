@@ -735,7 +735,8 @@ main #create_gifo article {
   max-width: 540px;
   min-height: 320px;
 }
-main #create_gifo article video, main #create_gifo article img {
+main #create_gifo article video,
+main #create_gifo article img {
   position: absolute;
   top: 15%;
   bottom: 15%;
@@ -744,6 +745,16 @@ main #create_gifo article video, main #create_gifo article img {
   width: 60%;
   height: 70%;
   opacity: 0;
+}
+main #create_gifo article .hidden {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  opacity: 1;
+  z-index: 2;
+  text-align: right;
 }
 main #create_gifo article .message {
   color: #572ee5;

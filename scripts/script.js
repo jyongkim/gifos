@@ -10,7 +10,7 @@
     let url, limit  = 3, offset = 0, phase;
     let total, pages, msg = 'favs';
     let m = 0, s = 0;
-    let likeHit = [], openHit = [], nowItem;
+    let likeHit = [],downHit = [], openHit = [], nowItem;
     let totalGifs = [], totalFavs = []
 /*	Event areas	*/
 	//	Navigation elements.
@@ -44,7 +44,9 @@
     //	Mis Gifos section.
     const myGifs	= document.querySelector('#my_gifos div') // Área de Mis Gifos.
     const noGifs	= document.querySelector('#my_gifos .noItems') // Área sin Mis Gifos.
-/*	Functions and methods	*/
+
+
+    /*	Functions and methods	*/
 	//	Giphy API query.
     async function fetchAPI(url, editArea, buildArea, type = 'result') { 
         fetch(url).then( response => response.json()
@@ -68,7 +70,7 @@
                     ${showActions(item, type)}
                 </article>`
             );
-            const showActions = (item, type) => (
+            const showActions = (item, type, upload) => (
                 `<div class="hidden">
                     <p>
                         ${item.username ? item.username : 'anonymous'}
@@ -79,10 +81,10 @@
                         <a class="icon${ type == 'gif_' ? ' trash' : 
                             type == 'fav_' ? ' fav active' : ' fav'}">
                         </a>
-                        <a href="${item.img ? item.img : item.images.fixed_height.url}" 
-                            class="icon download" target="_blank" download>
+                        <a src="${item.images.fixed_height.url}" 
+                            class="icon download" target="_blank" download="${item.title}">
                         </a>
-                        <a class="icon max"></a>
+                        <a class="icon ${ upload ? 'link' : 'max'}"></a>
                     </div>
                 </div>`
             )
@@ -144,7 +146,7 @@
 			    recAgain.innerHTML = `Repetir captura`;
             }
         //	Gifs creation.
-            const showMsg = (type) => {
+            const showMsg = (type, item) => {
                 // Message selection.
                 switch(type) {
                     case 1:
@@ -200,12 +202,13 @@
                             recMsg.style.display = 'grid';
 							uploadGif()		
 							gifBtn.innerHTML = 'Comenzar'
-							phase = 1;
-							type = false;
-							break;
+                            break;
+                        default:
+                            phase = 1
+                            type = false
+                        break;
                     }
                 //	Class assignment.
-					stageArea[phase - 1].classList.add('active')
 					switch (type){
 						case true:
 							phase > 1 ? stageArea[phase - 2].classList.remove('active') : null
@@ -214,9 +217,10 @@
 							for(i = 0 ; i < stageArea.length; i++){
 								stageArea[i].classList.remove('active');
 							}
-							stageArea[phase - 1].classList.add('active');
 							break;
-					}
+                    }
+                    stageArea[phase - 1].classList.add('active');
+                loadStorage()
             }
     //	Navigation bar.
 		//	Hamburger menu.
@@ -261,7 +265,8 @@
 			totalGifs.length == 0 ? noResults(noGifs, 'gifs') : noGifs.innerHTML = ``;
 			totalFavs.length == 0 ? noResults(noFavs, 'favs') : noFavs.innerHTML = ``;
 			
-			likeHit = document.querySelectorAll('.fav');
+            likeHit = document.querySelectorAll('.fav');
+            downHit = document.querySelectorAll('.icon download');
 			binHit	= document.querySelectorAll('.trash');
 			openHit = document.querySelectorAll('.max');
             }
@@ -269,11 +274,13 @@
 			const addStorage = async (id, type) => {
 				const response = await fetchURL(`${idURL+id}?api_key=${apiKey}`);
 				const data = JSON.stringify(response.data);
-				localStorage.setItem(type + id, data);
+                localStorage.setItem(type + id, data);
+                box.parentNode.id != 'results' ? window.location.reload() : null
 			} 
 		//	Remove item.
 			const remStorage = (id) => {
-				window.localStorage.removeItem( id );
+                window.localStorage.removeItem( id );                
+                box.parentNode.id != 'results' ? window.location.reload() : null
             }
     //	User elements.
 	//	Search suggestions.
@@ -388,16 +395,15 @@
                     json: true
             };
         // 	Query upload URL.
-            const data = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
-            console.log(await data);
-            showMsg(4)
-            id = data.data.id;
-            item = data.data;
+            const result = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
+            console.log(await result);
+            id = result.data.id;
+            item = result.data;
             addStorage(id, 'gif_');
+            showMsg(4)
             gifMedia.classList.toggle('show');
             gifView.classList.toggle('show');
-            phase = 1;
-            setPhase(false);
+            console.log(id +" "+ JSON.stringify(item))
             }
     //	API query - Gif_Id.
         const fetchURL = async(url, params = null) => {
@@ -409,15 +415,24 @@
 /* 	User actions */
 	//	Action buttons.
     const userActions = () => {			
-        likeHit.forEach( (like) => like.addEventListener( 'click', () => { 
+        likeHit.forEach( (like) => like.addEventListener( 'click', async() => { 
             totalItems(like); // Obtener elemnto padre (article) e imagen 
             box.classList.contains('favorite') ? remStorage(box.id) : like.classList.toggle('active') ? 
-                    addStorage(box.id, 'fav_') : remStorage('fav_' + box.id);
-            box.parentNode.id != 'results' ? window.location.reload() : null
+                    addStorage(box.id, 'fav_') : remStorage('fav_' + box.id)
         }	)	)
+        downHit.forEach((down) => down.addEventListener(
+            'click' , () =>{
+                totalItems(down);
+                browser.downloads.download(
+                    {url : down.src, filename : 'gifo.gif', conflictAction : 'uniquify'}
+                )
+                downloading.then(console.log(box.id), console.log('No se pudo descargar'));
+            }
+        ))
         binHit.forEach( bin => bin.addEventListener( 'click', () => {
             totalItems(bin);
-            remStorage(box.id)
+            remStorage(box.id);
+            location.reload();
         }	)	)	
         openHit.forEach( open  => open.addEventListener('click', (e) => {	
             totalItems(open);
