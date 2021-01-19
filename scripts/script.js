@@ -418,7 +418,7 @@
 	//	Action buttons.
     const userActions = () => {			
         likeHit.forEach( (like) => like.addEventListener( 'click', async() => { 
-            totalItems(like); // Obtener elemnto padre (article) e imagen 
+            totalItems(like); // Obtener elemento padre (article) e imagen.
             box.classList.contains('favorite') ? remStorage(box.id) : like.classList.toggle('active') ? 
                     addStorage(box.id, 'fav_') : remStorage('fav_' + box.id)
         }	)	)
@@ -445,7 +445,7 @@
             nextItem.classList.toggle('selected');
         }	)	)
     }
-    /* funcion que obtiene al elemento contenedor principal (a < .social < .hidden < article(ID))*/
+    /* Función que obtiene al elemento contenedor principal (a < .social < .hidden < article(ID)) */
     const totalItems = (param) => { 
         box = param.parentNode.parentNode.parentNode 
         item = param.parentNode.parentNode.parentNode.querySelector('img');
