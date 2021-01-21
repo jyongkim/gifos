@@ -89,7 +89,7 @@
 							</li>
 						</ul>
 						<button class="button">
-							${ offset + limit <= total ? "VER MAS...": "NO HAY MAS RESULTADOS" }
+							${ offset + limit <= total ? "VER MÁS...": "NO HAY MÁS RESULTADOS." }
 						</button>`
 				} else if (url.includes('search')){
 					noResults(pageArea, 'results')
@@ -104,13 +104,13 @@
 			const noResults = (editArea, icon) => {
 				switch(icon){
 					case 'favs': 
-						msg = `"¡guarda tu primer Gifo en favoritos <br/> para que se muestre aqui!"`; 
+						msg = `"¡Guarda tu primer GIFO en favoritos <br/> para que se muestre aquí!"`; 
 					break;
 					case 'results': 
-						msg = `"intenta con otra busqueda"`; 
+						msg = `"intenta con otra búsqueda"`; 
 					break; 
 					case 'gifs': 
-						msg = `"Animate a crear tu primer GIFO"`; 
+						msg = `"Anímate a crear tu primer GIFO"`; 
 					break;
 				}
 				editArea.innerHTML = `
@@ -133,26 +133,26 @@
 			const timeStop = () => {
 				clearInterval(recTime)
 				m = 0; s = 0;
-			    recAgain.innerHTML = `Repetir Captura`
+			    recAgain.innerHTML = `Repetir captura`
 			}
 		//	Gifs creation.
 			const showPhase = (phase) => {
 				switch (phase) {
 					case 1:
-						msgTitle = `Aqui podras<br/>crear tus propios <span class="special">GIFOS</span>`
+						msgTitle = `Aquí podrás<br/>crear tus propios <span class="special">GIFOS</span>`
 						msg = `¡Crea tu GIFO en sólo 3 pasos!<br/>(Sólo necesitas una cámara para grabar un video)`
 					break;
 					case 2:
 						msgTitle = `¿Nos das acceso <br/>a tu cámara?`
-						msg = `El acceso a tu camara será valido solo<br/>por el tiempo en el que estes creando el GIFO`
+						msg = `El acceso a tu cámara será valido sólo<br/>por el tiempo en el que estés creando el GIFO`
 					break;
 					case 3:
 						msgTitle = `class="loader"`
-						msg = `Estamos subiendo tu GIFO`
+						msg = `Estamos subiendo tu GIFO...`
 					break;
 					case 4:
 						msgTitle = `class="check"`
-						msg = `GIFO subido con éxito`
+						msg = `¡GIFO subido con éxito!`
 					break; 
 				}
 				// Evalúa la etapa y coloca el texto o la clase en consecuencia.
