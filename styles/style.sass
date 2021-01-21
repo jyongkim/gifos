@@ -45,6 +45,7 @@ body
 
 /*Icons*/
 .icon
+	cursor: pointer
 	display: inline-block
 	+normalize(.5rem,0,0)
 	border-radius: .25rem
@@ -53,7 +54,7 @@ body
 	background-repeat: no-repeat
 	background-position: center
 	background-size: contain
-@each $ico in $icons	
+@each $ico in $icons
 	/*Logo light mode*/
 	.#{$ico}
 		background-image: url($icon+"icon_"+$ico+".svg")
@@ -114,7 +115,7 @@ nav
 		+normalize($p:0)
 		line-height: 1.5rem
 		font-size: 2rem
-	
+
 	/*Main menu*/
 	.menu
 		+normalize
@@ -159,7 +160,7 @@ nav
 					background-color: $bg_color
 					@media screen and (min-width: $md)
 						display: none
-			
+
 			/*Light mode / Dark mode */
 			&:first-child
 				label
@@ -186,11 +187,11 @@ nav
 	/*Dropdown menu*/
 	.open
 		display: block
-		opacity: .9
+		opacity: .8
 		@media screen and (min-width: $md)
 			display: flex
 			padding: 0
-
+			
 /*Header*/
 #header	
 	+mode
@@ -279,7 +280,7 @@ nav
 					width: 90%
 					height: 1px
 					background-color: $color
-		/*Search button*/	
+		/*Search button*/		
 		button
 			position: absolute
 			z-index: 1
@@ -320,7 +321,9 @@ main
 			line-height: 2.5rem
 		&:not(target)
 			display: none
-		&:target
+		&:target,
+		&:first-child,
+		&:last-child
 			display: block
 	/*Trending elements*/
 	section:last-child
@@ -348,17 +351,14 @@ main
 		button.selected
 			position: fixed
 			top: calc(50% - 1rem)
-			z-index: 5
+			z-index: 3
 	.title
 		+normalize
 		font-size: 2rem
 		&:empty ~ #pagination
 			display: none
-	/*Search results*/
-	#search
-		display: block
 	/*GIF creation*/
-	#create_gifo
+	#crear_gifo
 		overflow: hidden
 		+normalize(auto, 0, 0)
 		flex-direction: column
@@ -373,12 +373,11 @@ main
 				left: -30%
 				width: 20vw
 				min-width: 4rem
-				max-width: 12rem
+				max-width: 10rem
 				height: 8rem
 				background: $camera
-				background-size: 60%, 38%
+				background-size: 70%, 45%
 				@media screen and (min-width: $lg)
-					width: 10rem
 					left: -35%
 			.tape
 				position: absolute
@@ -397,74 +396,59 @@ main
 			+normalize(auto, 1px solid $color, 1.5rem)
 			overflow: visible
 			position: relative
-			display: flex
-			justify-content: center
-			align-items: center
 			width: 60%
 			max-width: 540px
 			min-height: 320px
+			img,
 			video, 
-			img
-				position: absolute
-				top: 15%
-				bottom: 15%
-				left: 20%
-				right: 20%
-				width: 60%
-				height: 70%
-				opacity: 0
-			video.show ~ .message.bgColor + .hidden
-				display: block
-			.hidden
-				display: none
-			.hidden
-				top: 0
-				right: 0
-				bottom: 0
-				left: 0
-				width: 100% !important
-				opacity: 1
-				z-index: 2
-				text-align: right
 			.message
-				+mode
 				position: absolute
-				top: 0
-				left: 0
+				top: 10%
+				bottom: 10%
+				left: 15%
+				right: 15%
+				width: 70% !important
+				height: 80%
+				opacity: 0
+			.message
+				+mode($color, $bg_color)
 				display: grid
-				justify-content: center	
+				justify-content: center
 				align-content: center
-				width: 100% !important // Prioriza el tamaño de la etiqueta.
-				height: 100%
-				z-index: 2
+				opacity: 1
 				h1
 					+normalize
-					&.loader::before
-						content: url($icon+"loader.svg")
-						animation: rotate 2s linear infinite
-						@keyframes rotate 
-							to
-								transform: rotate(360deg)
-						
-					&.success::before
-						content: url($icon+"check.svg")
+					font-size: 1.5rem
+					line-height: 1.5rem
+					display: inline-block
 				p
-					+normalize
-				img
-					display: block	
-				&.bgColor
+					+normalize($p: 0)
+					font-size: .9rem
+				.loader::before
+					content: url($icon+'loader.svg')
+					display: block
+					animation: load 2.5s linear infinite
+					@keyframes load
+						to
+							transform: rotate(360deg)
+				.check::before
+					content: url($icon+'check.svg')
+				&.active
 					+mode($bg_color, $color)
-					position: absolute
-					top: 15%
-					bottom: 15%
-					left: 20%
-					right: 20%
-					width: auto !important
-					height: auto  !important
-					opacity: .6
+					opacity: .8
+				.hidden
+					top: 0
+					bottom: 0
+					width: 100%
+					.social
+						text-align: right
+						.icon
+							+normalize(.25rem, 0, 0)
+							border-radius: .25rem
+							width: 2rem
 		&:target
 			display: flex
-		div:last-child
+		& div:last-child
 			width: 62.5%
 			max-width: 720px
 		/*Process area*/
@@ -487,9 +471,6 @@ main
 				position: absolute
 				right: 2.5%
 				z-index: 1
-				border-bottom: .2rem solid transparent
-				&:hover
-					border-color: $special_color
 			.active
 				+mode($bg_color,$color)
 		button
@@ -501,10 +482,11 @@ main
 			text-align: center
 			line-height: 1rem
 		.show
-			display: block
+			display: grid
 			opacity: 1
+			z-index: 2
 	/*Results area*/
-	#results
+	#results > div
 		overflow: hidden
 		display: grid
 		grid-template-columns: repeat(auto-fill, minmax(200px, 2fr))
@@ -527,26 +509,26 @@ main
 		.button
 			border-radius: 1rem
 	/*Favorites area*/
-	#favorites, 
-	#my_gifos
+	#favoritos, 
+	#mis_gifos
 		& > div
 			display: grid
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
 			gap: .5rem
 		.noItems
 			display: block
-		&:target #search
+		&:target  #search
 			height: 0
 			overflow: hidden
 	/*Trending GIFs*/
-	#trending
+	#trending > div
 		overflow: auto
 		max-height: 250px
 		display: grid
 		grid-template-columns: repeat(3, 250px)
 		justify-content: flex-start
 		align-content: center
-		@media screen and (min-width: $md)
+		@media screen and (min-width: $lg)
 			justify-content: center
 	/*Independent elements*/
 	article:not(.active)
@@ -569,29 +551,33 @@ main
 			top: -100%
 			bottom: 100%
 			left: 0
-			right: 0
+			width: 100%
 			.social
 				position: absolute
 				top: .5rem
 				right: .5rem
+				z-index: 1 
+				.max
+					margin: 0
+					position: absolute
+					right: -2rem
+					top: -1rem
+					width: 300px
+					height: 250px
+					opacity: 0
+					z-index: -1
+					@media screen and (min-width: $md)
+						position: static
+						margin: .25rem
+						width: 2rem
+						height: 2rem
+						opacity: 1
 				a
 					position: relative
 					z-index: 2
-				.max
-					position: absolute
-					right: -1rem
-					top: -1rem
-					width: 400px
-					height: 400px
-					opacity: 0
-					z-index: 1
-					@media screen and (min-width: $md)
-						position: static
-						width: auto
-						height: auto
-						opacity: 1
+					&.max
+						z-index: -1
 			p
-				max-width: 70%
 				+normalize(0, none, .2rem)
 				text-align: left
 		&:hover,
@@ -599,10 +585,6 @@ main
 			.hidden
 				bottom: 0
 				top: 0	
-			a
-				+normalize(.25rem)
-				width: 1.5rem
-				height: 1.5rem
 	article.active
 		+mode
 		position: fixed
@@ -618,24 +600,23 @@ main
 		img
 			position: relative
 			+normalize(4.2rem auto .5rem, 0, 0)
-			width: 100%
+			padding: .5rem
 			max-width: 480px
 			max-height: 360px
 		.hidden
+			+normalize(.5rem, none, .5rem)
 			position: static
 			display: flex
 			justify-content: space-between
 			width: 100%
 			max-width: 480px
 			text-align: left
-			a
-				width: 2rem
-				height: 2rem
 			.close
 				position: fixed
 				top: 1rem
 				right: 1rem
-	video, img
+	video, 
+	img
 		height: 100%
 	/*Local storage*/
 	.fav.active
@@ -649,6 +630,8 @@ main
 	text-align: center
 	.special
 		color: #333
+	a
+		font-weight: bold
 	/*Social networks*/
 	.social
 		margin: 3rem auto
@@ -679,20 +662,18 @@ main
 			+mode($color, $bg_color)
 		.menu
 			+mode($bg_color: darken($bg_color, 20%))
+			:first-child
+				label:after
+					content:' Diurno'
 			@media screen and (min-width: $md)
-				
-			li
 				+mode($color, transparent)
 				a
-					color: $color
-				&:first-child
-					label:after
-						content:' Diurno'
+					+mode($color, transparent)
 				&:last-child a:hover,
-				&.active:last-child a
-					+mode($bg_color, $color)
-				&.active a
-					+mode(darken($color, 20%), transparent)
+				.active:last-child a
+					+mode(lighten($bg_color, 20%), transparent)
+				.active a
+					+mode(darken($color, 25%), transparent)
 	/*Header*/
 	& ~ #header
 		+mode($color, $bg_color)
@@ -719,7 +700,7 @@ main
 					+mode($bg_color, $color)
 		section:last-child
 			+mode($color, $bg_color: darken($bg_color, 10%))
-		#create_gifo
+		#crear_gifos
 			article
 				+mode($color, $bg_color)
 				+normalize(auto, 1px solid $color, 1.5rem)
@@ -730,7 +711,6 @@ main
 					border-color: $color
 				.active
 					+mode($bg_color, $color)
-
 		article.active
 			+mode($color, $bg_color)
 			.menu
@@ -739,7 +719,7 @@ main
 					+mode($color, transparent)
 				.active
 					+mode($bg_color, color)
-	
+
 	/*Footer*/
 	& ~ #footer
 		+mode($color, $bg_color)

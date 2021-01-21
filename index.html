@@ -1,123 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta 
+		name="viewport" 
+		content="
 			width=device-width,
 			initial-scale=1,
 			maximum-scale=3" />
-    <title>Gifos</title>
-    <link rel="icon" href="assets/icons/icon_logo.svg" />
-    <link rel="stylesheet" href="styles/style.css" />
-  </head>
-  <body>
-    <input id="mode" type="checkbox" />
-    <nav>
-      <a class="icon logo" href="#"></a>
-      <button id="menu" class="icon">&equiv;</button>
-      <ul class="menu">
-        <li><a><label for="mode">Modo </label></a></li>
-        <li><a href="#favorites">Favoritos</a></li>
-        <li><a href="#my_gifos">Mis GIFOS</a></li>
-        <li><a href="#create_gifo"> + </a></li>
-      </ul>
-    </nav>
-    <header id="header">
-      <h1>Inspírate, busca, guarda, y crea los mejores
-        <span class="special"> GIFOS </span>
-      </h1>
-      <img src="assets/icons/ilustra_header.svg" alt="ilustra_header" />
-      <form id="search">
-        <input
-          id="textField"
-          name="textField"
-          type="search"
-          list="suggestion"
-          minlength="1"
-          maxlength="50"
-          autocomplete="off"
-          required />
-        <label for="textField">Buscar GIFOS y más</label>
-        <select id="suggestion" multiple></select>
-        <button class="icon search"></button>
-      </form>
-      <p>
-        <strong>Trending: </strong>
-        Reactions, Entertainment, Sports, Stickers, Artist
-      </p>
-    </header>
-    <main>
-      <section id="search">
-        <h1 class="title"></h1>
-        <div id="results"></div>
-        <form id="pagination"></form>
-      </section>
-      <section id="favorites">
-        <h1><img src="assets/icons/section_favs.svg"/>Favoritos</h1>
-        <div></div>
-        <div class="noItems"></div>
-      </section>
-      <section id="create_gifo">
-        <h1 data-title="Crear Gifo"></h1>
-        <article>
-          <div class="camera"></div>
-          <video class="show"></video>
-          <img />
-          <div class="message"></div>
-          <div class="hidden">
-            <div class="social">
-              <a class="icon download"></a>
-              <a class="icon link"></a>
-            </div>
-          </div>
-        </article>
-        <div>
-          <ul class="menu">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <a href="#create_gifo"></a>
-            <div class="tape"></div>
-          </ul>
-          <button class="button">Crear</button>
-        </div>
-      </section>
-      <section id="my_gifos">
-        <h1><img src="assets/icons/section_gifs.svg" />Mis Gifos</h1>
-        <div></div>
-        <div class="noItems"></div>
-      </section>
-      <section>
-        <h1>Trending GIFOS</h1>
-        <p>Mira los últimos GIFOS de nuestra comunidad.</p>
-        <div id="trending"></div>
-        <button class="button prev"><</button>
-        <button class="button next">></button>
-      </section>
-    </main>
-    <footer id="footer">
-      <div class="social">
-        <p>Compartir en:</p>
-        <a
-          class="icon facebook"
-          href="https://facebook.com"
-          target="_blank"
-        ></a>
-        <a class="icon twitter" href="https://twitter.com" target="_blank"></a>
-        <a
-          class="icon instagram"
-          href="https://instagram.com"
-          target="_blank"
-        ></a>
-      </div>
-      <address>
-        &copy;<a href="#" class="special">GIFOS 2021 </a>
-        All Rights Reserved.
-      </address>
-    </footer>
-    <script src="scripts/script.js"></script>
-    <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
-  </body>
+	<title>Gifos</title>
+	<link rel="icon" href="assets/icons/icon_logo.svg">
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+	<input id="mode" type="checkbox"/>
+	<nav>
+		<a class="icon logo" href="#"></a>
+		<button id="menu" class="icon">&equiv;</button>
+		<ul class="menu">
+			<li><a><label for="mode">Modo </label></a></li>
+			<li><a href="#favoritos">Favoritos</a></li>
+			<li><a href="#mis_gifos">Mis GIFOS</a></li>
+			<li><a href="#crear_gifo"> + </a></li>
+		</ul>
+	</nav>
+	<header id="header" >
+		<h1>Inspírate, busca, guarda, y crea los mejores 
+			<span class="special"> GIFOS </span>
+		</h1>
+		<img src="assets/icons/ilustra_header.svg" alt="ilustra_header">
+		<form id="search">
+			<input 
+				id="textField"
+				name="textField" 
+				type="search" 
+				list="suggestion" 
+				minlength="1"
+				maxlength="50" 
+				autocomplete="off" 
+				required>
+			<label for="textField">Buscar GIFOS y mas</label>
+			<select id="suggestion" multiple>
+			</select>
+			<button class="icon search"></button>
+		</form>
+		<p>
+			<strong>Trending: </strong>
+			Reactions, Entertainment, Sports, Stickers, Artist
+		</p>
+	</header>
+	<main>
+		<section id="results">
+			<h1 class="title"></h1>
+			<div>
+			</div>
+			<form id="pagination">
+			</form>
+		</section>
+		<section id="favoritos">
+			<h1><img src="assets/icons/section_favs.svg">Favoritos</h1>
+			<div></div>
+			<div class="noItems"></div>
+		</section>
+		<section id="crear_gifo">
+			<h1 data-title="Crear Gifo"> </h1>
+			<article>
+				<div class="camera"></div>
+				<video class="show"></video>
+				<img />
+				<div class="message show result"></div>
+			</article>
+			<div>
+				<ul class="menu">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+					<a href="#crear_gifo"></a>
+					<div class="tape"></div>
+				</ul>
+				<button class="button">Crear</button>
+			</div>
+		</section>
+		<section id="mis_gifos">
+			<h1><img src="assets/icons/section_gifs.svg">Mis Gifos</h1>
+			<div></div>
+			<div class="noItems"></div>
+		</section>
+		<section id="trending">
+			<h1>Trending GIFOS</h1>
+			<p>Mira los ultimos GIFOS de nuestra comunidad.</p>
+			<div></div>
+			<button class="button prev"> < </button>
+			<button class="button next"> > </button>
+		</section>
+	</main>
+	<footer id="footer" >
+		<div class="social">
+			<p>Compartir en:</p>
+			<a class="icon facebook" href="https://facebook.com" target="_blank"></a>
+			<a class="icon twitter" href="https://twitter.com" target="_blank"></a>
+			<a class="icon instagram" href="https://instagram.com" target="_blank"></a>
+		</div>
+		<address>
+			&copy;<a href="#" class="special">GIFOS 2020 </a>
+			All Rights Reserved.
+		</address>
+	</footer>
+	<script src="scripts/script.js"></script>
+	<script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
+</body>
 </html>
