@@ -15,35 +15,35 @@
 		let totalGifs = [], totalFavs = []
 /*	Event areas	*/
 	//	Navigation elements.
-		const menuBtn	= document.querySelector('#menu')
-		const menuList	= document.querySelector('.menu')
-		const menuItem	= document.querySelectorAll('.menu li')
-		const modeItem	= document.querySelector('#mode')
-		const modeLabel	= document.querySelector('label[for="mode"]')
-		const prevItem	= document.querySelector('section:last-child > .prev')
-		const nextItem	= document.querySelector('section:last-child > .next')
+		const menuBtn	= document.querySelector('#menu'); // Botón para abrir el menú.
+		const menuList	= document.querySelector('.menu'); // Lista con los hipervículos.
+		const menuItem	= document.querySelectorAll('.menu li'); // Array de los ítems de la lista. Para marcarlos como activos.
+		const modeItem	= document.querySelector('#mode'); // Botón anterior de la navegación del área trending.
+		const modeLabel	= document.querySelector('label[for="mode"]'); // Botón siguiente de la navegación del área trending.
+		const prevItem	= document.querySelector('section:last-child > .prev'); // El input oculto de tipo checkbox.
+		const nextItem	= document.querySelector('section:last-child > .next'); // Etiqueta vinculada al input anterior.
 	//	Search form.
-		const frmSearch	= document.querySelector('#search')
-		const textField = document.querySelector('#search input')
-		const dataList 	= document.querySelector('#suggestion')
+		const frmSearch	= document.querySelector('#search'); // Formulario ('submit').
+		const textField = document.querySelector('#search input');// Campo de búsqueda ('input').
+		const dataList 	= document.querySelector('#suggestion'); // Lista desplegable ('click')
 	//	Results area.
-		const titleArea = document.querySelector('section h1')
-		const gifsArea 	= document.querySelector('#results div')
-		const pageArea 	= document.querySelector('#pagination')
-		const trendArea = document.querySelector('#trending div')
+		const titleArea = document.querySelector('section h1'); // Área de las palabras buscadas.
+		const gifsArea 	= document.querySelector('#results div'); // Área donde se cargan los gifs.
+		const pageArea 	= document.querySelector('#pagination'); // Área de los totales y la cantidad de páginas.
+		const trendArea = document.querySelector('#trending div'); // Área trending topic.
 	//	Recording section.
-		const stageArea	= document.querySelectorAll('#crear_gifo .menu li')
-		const gifBtn 	= document.querySelector('#crear_gifo button')
-		const gifMedia 	= document.querySelector('#crear_gifo article video')
-		const gifView	= document.querySelector('#crear_gifo article img')
-		const recAgain	= document.querySelector('#crear_gifo .menu a')
-		const recMsg	= document.querySelector('#crear_gifo .message')
+		const stageArea	= document.querySelectorAll('#crear_gifo .menu li'); // Etapas de la grabación.
+		const gifBtn 	= document.querySelector('#crear_gifo button'); // Botón que cambia de texto.
+		const gifMedia 	= document.querySelector('#crear_gifo article video'); // Video.
+		const gifView	= document.querySelector('#crear_gifo article img'); // Imágen.
+		const recAgain	= document.querySelector('#crear_gifo .menu a'); // El hipervículo que vuelve a la etapa 1.
+		const recMsg	= document.querySelector('#crear_gifo .message'); // El mensaje que aparece en las etapas de grabación.
 	//	Favorites section.
-		const favArea 	= document.querySelector('#favoritos div')
-		const noFavs 	= document.querySelector('#favoritos .noItems')
+		const favArea 	= document.querySelector('#favoritos div'); // Área de favoritos.
+		const noFavs 	= document.querySelector('#favoritos .noItems'); // Área sin favoritos.
 	//	Mis Gifos section.
-		const gifArea	= document.querySelector('#mis_gifos div')
-		const noGifs	= document.querySelector('#mis_gifos .noItems')
+		const gifArea	= document.querySelector('#mis_gifos div'); // Área de Mis Gifos.
+		const noGifs	= document.querySelector('#mis_gifos .noItems'); // Área sin Mis Gifos.
 /*	Functions and methods	*/
 	//	Giphy API query.
 		const fetchAPI = (url, editArea, buildArea, type = 'result') => { 
