@@ -17,11 +17,10 @@
     const menuBtn	= document.querySelector('#menu'); // Botón para abrir el menú.
     const menuList	= document.querySelector('.menu'); // Lista con los hipervículos.
     const menuItem	= document.querySelectorAll('.menu li'); // Array de los ítems de la lista. Para marcarlos como activos.
-    const prevItem	= document.querySelector('section:last-child > .prev'); // Botón anterior de navegación del área trending.
-    const nextItem	= document.querySelector('section:last-child > .next'); // Botón siguiente de navegación del área trending.
+    const prevItem	= document.querySelector('section:last-child > .prev'); // Botón anterior de la navegación del área trending.
+    const nextItem	= document.querySelector('section:last-child > .next'); // Botón siguiente de la navegación del área trending.
     const modeItem  = document.querySelector('#mode'); // El input oculto de tipo checkbox.
     const modeLabel = document.querySelector('nav label'); // Etiqueta vinculada al input anterior.
-    
     //	Search form.
     const frmSearch	= document.querySelector('#search') // Formulario ('submit').
     const textField = document.querySelector('#search input') // Campo de búsqueda ('input').
