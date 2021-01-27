@@ -151,10 +151,10 @@ nav
 				@media screen and (min-width: $md)
 					+mode($color, transparent)
 				&::after
-					+normalize(1rem 0 0, none, 0)
+					+normalize(1rem auto 0, none, 0)
 					content: ''
 					display: block
-					width: 60%
+					width: 60px
 					height: 1px
 					background-color: $bg_color
 					@media screen and (min-width: $md)
@@ -164,7 +164,6 @@ nav
 			&:first-child
 				label
 					display: inline-block
-					+mode
 					+normalize($p: .5rem 1rem)
 					font-weight: bold
 					cursor: pointer

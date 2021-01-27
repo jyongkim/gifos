@@ -349,12 +349,12 @@ nav .menu li a {
   }
 }
 nav .menu li a::after {
-  margin: 1rem 0 0;
+  margin: 1rem auto 0;
   border: none;
   padding: 0;
   content: "";
   display: block;
-  width: 60%;
+  width: 60px;
   height: 1px;
   background-color: #fefefe;
 }
@@ -365,8 +365,6 @@ nav .menu li a::after {
 }
 nav .menu li:first-child label {
   display: inline-block;
-  color: #572ee5;
-  background-color: #fefefe;
   margin: 0;
   border: 0;
   padding: 0.5rem 1rem;
