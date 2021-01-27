@@ -364,10 +364,6 @@ nav .menu li a::after {
   }
 }
 nav .menu li:first-child label {
-  display: inline-block;
-  margin: 0;
-  border: 0;
-  padding: 0.5rem 1rem;
   font-weight: bold;
   cursor: pointer;
   background-color: transparent;
