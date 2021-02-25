@@ -24,8 +24,8 @@ body {
   border: 0;
   padding: 0;
   border-radius: 0.25rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -827,7 +827,6 @@ main #crear_gifo:target article .message .hidden .social .icon {
   margin: 0.25rem;
   border: 0;
   padding: 0;
-  width: 2rem;
   border-radius: 0.25rem;
 }
 main #crear_gifo:target:target {
@@ -1013,8 +1012,8 @@ main article:not(.active) .hidden .social .max {
   main article:not(.active) .hidden .social .max {
     position: static;
     margin: 0.25rem;
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     opacity: 1;
   }
 }

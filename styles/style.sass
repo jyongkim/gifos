@@ -58,8 +58,8 @@ body
 	display: inline-block
 	+normalize(.25rem,0,0)
 	border-radius: .25rem
-	width: 1.5rem
-	height: 1.5rem
+	width: 1.5rem !important
+	height: 1.5rem !important
 	background-repeat: no-repeat
 	background-position: center
 	background-size: contain
@@ -422,7 +422,6 @@ main
 						text-align: right
 						.icon
 							+normalize(.25rem, 0, 0)
-							width: 2rem
 							border-radius: .25rem
 		&:target
 			display: flex
@@ -532,8 +531,8 @@ main
 					@media screen and (min-width: $md)
 						position: static
 						margin: .25rem
-						width: 2rem
-						height: 2rem
+						width: 1.5rem
+						height: 1.5rem
 						opacity: 1
 				a
 					+position(relative, 2)
