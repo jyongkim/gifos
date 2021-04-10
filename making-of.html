@@ -51,23 +51,27 @@
                 <label class="button" for="verBusqueda">Ver más...</label>
                 <input type="checkbox" id="verBusqueda">
                 <pre class="mostrar">
-    const frmSearch	= document.querySelector('#search') // Formulario ('submit').
-    const textField = document.querySelector('#search input') // Campo de búsqueda ('input').
-    const dataList 	= document.querySelector('#suggestion') // Lista desplegable ('click')
+    const frmSearch	= document.querySelector('#search') <i class="orange">// Formulario ('submit').</i>
+    const textField = document.querySelector('#search input')<i class="orange">// Campo de búsqueda ('input').</i>
+    const dataList 	= document.querySelector('#suggestion')<i class="orange">// Lista desplegable ('click')</i>
     
-    textField.addEventListener(
-        'input', () => {
-            if(textField.checkValidity()){
-                termino = textField.value;
-                url = `${tagsURL}${termino}?api_key=${apiKey}&lang=es`;
-                dataList.innerHTML = ``;
-                fetchAPI(url, dataList, showOptions);
-    }	}	)	;
-    dataList.addEventListener(
-        'click', () => {
-            textField.value = dataList.value 
-            frmSearch.querySelector('button').click()
-            textField.focus();
+    textField.addEventListener( 'input', () => {
+        if(textField.checkValidity()){
+            dataList.innerHTML = ``; termino = textField.value
+            url = `${tagsURL+termino}?api_key=${apiKey}&lang=es`
+            fetchAPI(url, dataList, showOptions)
+    }	}	)
+    dataList.addEventListener( 'click', () => {
+        textField.value = dataList.value 
+        frmSearch.querySelector('button').click(); textField.focus()
+    }	)
+    
+    frmSearch.addEventListener( 'submit', (e) => {
+        e.preventDefault();	hitsArea.innerHTML = ``
+        limit = 12;	offset = 0;	termino = textField.value
+        url = `${searchURL}?api_key=${apiKey}&q=${termino}&limit=${limit}&offset=${offset}&rating=g&lang=es`
+        titleArea.innerHTML = termino
+        fetchAPI(url, hitsArea, showGifs)
     }	)
                 </pre>
             </aside>
@@ -118,13 +122,14 @@
                 <label class="button" for="verResult">Ver más...</label>
                 <input type="checkbox" id="verResult">
                 <pre class="mostrar">
+                
     const showPages = (url, total) => {
         if (url.includes('search') && total >= 1) { 
             pageArea.innerHTML =
                 `&lt;ul>
-                    &lt;li><strong>Resultados</strong>${total}&lt;/li>
+                    &lt;li>&lt;strong>Resultados&lt;/strong>${total}&lt;/li>
                     &lt;li>
-                        <strong>Páginas</strong> 
+                        &lt;strong>Páginas&lt;/strong> 
                         ${ ( actual = (offset / 12) + 1 ) <= (pages = Math.ceil(total / 12)) ? actual : pages } / ${ pages }
                     &lt;/li>
                 &lt;/ul>
@@ -176,178 +181,187 @@
                 <label class="button" for="verCrear">Ver Más...</label>
                 <input type="checkbox" id="verCrear">
                 <pre class="mostrar">
-
-                    <i class="orange">//  Gifs creation.</i>
-                    const showMsg = (type) => {
-                        <i class="orange">// Message selection.</i>
-                        switch(type) {
+  <i class="orange"> //	Recording stopwatch.</i>
+        const timeStart = () => {
+            clock(); recTime = setInterval( clock , 999 )
+        }
+        const clock = () => {
+            var mAux, sAux;
+            s++; if(s > 59){ m++; s=0 }
+            s < 10 ? sAux = "0" + s : sAux = s
+            m < 10 ? mAux = "0" + m : mAux = m
+            recAgain.innerHTML = `${mAux}:${sAux}`
+        }
+        const timeStop = () => {
+            clearInterval(recTime)
+            m = 0; s = 0; recAgain.innerHTML = `Repetir Captura`
+        }
+                   <i class="orange">// Stage message.</i>
+                        const showPhase = (phase) => {
+                            switch (phase) {
+                                case 1:
+                                    msgTitle = `Aquí podrás<br/>crear tus propios <span class="special".>GIFOS</span>`
+                                    msg = `¡Crea tu GIFO en sólo 3 pasos!<br/>(Sólo necesitas una cámara para grabar un video.)`
+                                break;
+                                case 2:
+                                    msgTitle = `¿Nos das acceso <br/>a tu cámara?`
+                                    msg = `El acceso a tu cámara será valido sólo<br/>por el tiempo en el que estés creando el GIFO`
+                                break;
+                                case 3:
+                                    msgTitle = `class="loader"`
+                                    msg = `Estamos subiendo tu GIFO...`
+                                break;
+                                case 4:
+                                    msgTitle = `class="check"`
+                                    msg = `¡GIFO subido con éxito!`
+                                break; 
+                            }
+                           <i class="orange">// Evalúa la etapa y coloca el texto o la clase en consecuencia.</i>
+                            phase >= 3 ? recMsg.classList.add('active') : recMsg.classList.remove('active')
+                            recMsg.innerHTML = ` 
+                                &lt;h1 ${phase >= 3 ? msgTitle + '>' : '>' + msgTitle }&lt;/h1>
+                                &lt;p>${msg}&lt;/p> 
+                                ${phase == 4 ? showActions(item, 'gif_', true) : ''}`
+                        }
+                    const setPhase = (type) => {
+                    <i class="orange">//	Recording stages.</i>
+                        switch(phase){
                             case 1:
-                                recMsgTitle = `Aquí podrás crear tus propios <span class="special">GIFOS</span>`
-                                recMsgText =
-                                `¡Crea tu GIFO en sólo 3 pasos! <br> (sólo necesitas una cámara para grabar un video)`
-                            break;
+                                showPhase(2)
+                                gifBtn.innerHTML = 'Grabar'
+                                startGif()
+                                gifMedia.classList.add('show'); gifView.classList.remove('show')
+                                break
                             case 2:
-                                recMsgTitle = `¿Nos das acceso a tu cámara?`
-                                recMsgText = `El acceso a tu cámara será validado sólo <br> por el tiempo en el que estés creando el GIFO.`
-                            break;
+                                timeStart()
+                                gifBtn.innerHTML = 'Finalizar'
+                                recGif()
+                                break;
                             case 3:
-                                recMsgTitle = `class="loader"`;
-                                recMsgText = `Estamos subiendo tu GIFO.`
-                            break;
+                                timeStop()
+                                gifBtn.innerHTML = 'Subir'
+                                stopGif()
+                                gifMedia.classList.toggle('show'); gifView.classList.toggle('show') 
+                                break;
                             case 4:
-                                recMsgTitle = `class="success"`
-                                recMsgText = `GIFO subido con éxito.`
+                                uploadGif()
+                                gifBtn.innerHTML = 'Comenzar'
+                                recMsg.classList.toggle('show')
+                            break;
+                            default:
+                                phase = 1; type = false
                             break;
                         }
-                        <i class="orange">// Evalúa la etapa y coloca el texto o la clase en consecuencia.</i>
-                        recMsg.innerHTML =
-                        `&lt;h1 ${type >= 3 ? recMsgTitle : '' }>
-                            ${type < 3 ? recMsgTitle : ''}
-                        &lt;/h1>
-                        &lt;p>${recMsgText}&lt;/p>`
-                        type >=3 ? recMsg.classList.add('bgColor') : recMsg.classList.remove('bgColor');
-                    }
-                    const setPhase = (type) => {
-                        <i class="orange">//  Recording stages.</i>
-                            switch(phase){
-                                case 1:
-                                    startGif(); 
-                                    gifBtn.innerHTML = 'Grabar';
-                                    gifMedia.classList.add('show'); 
-                                    gifView.classList.remove('show');
-                                    showMsg(2)
-                                    break;
-                                case 2:
-                                    recGif(); 
-                                    recMsg.style.display = 'none';
-                                    gifBtn.innerHTML = 'Finalizar';
-                                    timeStart();
-                                    break;
-                                case 3:
-                                    stopGif(); 
-                                    gifBtn.innerHTML = 'Subir';
-                                    timeStop();
-                                    gifMedia.classList.toggle('show'); 
-                                    gifView.classList.toggle('show'); 
-                                    break;
-                                case 4:
-                                    recMsg.style.display = 'grid';
-                                    uploadGif()     
-                                    gifBtn.innerHTML = 'Comenzar'
+                  <i class="orange"> //	Class assignment.</i>
+                        switch (type){
+                            case true:
+                                phase > 1 ? 
+                                    stageArea[phase - 2].classList.remove('active') : null
                                 break;
-                                default:
-                                    phase = 1;
-                                    type = false;
+                            case false:
+                                for(i = 0 ; i < stageArea.length; i++){ stageArea[i].classList.remove('active') }
                                 break;
-                            }
-                        <i class="orange">//  Class assignment.</i>
-                            stageArea[phase - 1].classList.add('active')
-                            switch (type){
-                                case true:
-                                    phase > 1 ? stageArea[phase - 2].classList.remove('active') : null
-                                    break;
-                                case false:
-                                    for(i = 0 ; i < stageArea.length; i++){
-                                        stageArea[i].classList.remove('active');
-                                    }
-                                    stageArea[phase - 1].classList.add('active');
-                                    break;
-                            }
+                        }	phase < 4 ? stageArea[phase - 1].classList.add('active') : null
                     }
-            <i class="orange">/*Gifs creation*/ </i>
-                <i class="orange">//  Recording process.</i>
-                recAgain.addEventListener( 'click', () => {
-                    phase = 1;
-                    setPhase(false);
-                    recAgain.innerHTML = "";
-                }   )
-                gifBtn.addEventListener( 'click', () => {
-                    phase < 4 ? phase++ : phase = 1;
-                    setPhase(true);
-                }   )
-            <i class="orange">//  Check the webcam. </i>
-                async function startGif() {
-                    const stream = await navigator.mediaDevices.getUserMedia({
-                        audio: false,
-                        video: { max: 480 }
-                    }   );
-                    gifMedia.srcObject = stream;
-                    await gifMedia.play();
-                }
-            <i class="orange">//  Start recording. </i>
-                async function recGif() {
-                    const stream = gifMedia.srcObject;
-                    videoRecorder = new RecordRTCPromisesHandler(stream, {
-                        type: "video",
-                        mimeType: "video/webm; codecs=vp8",
-                        disableLogs: true,
-                        videoBitsPerSecond: 128000,
-                        frameRate: 30,
-                        quality: 10,
-                        width: 480,
-                        hidden: 240
-                    });
-                    gifRecorder = new RecordRTCPromisesHandler(stream, {
-                        disableLogs: true,
-                        type: "gif",
-                        frameRate: 1,
-                        quality: 10,
-                        width: 480,
-                        hidden: 240
-                    });
-                    await videoRecorder.startRecording();
-                    await gifRecorder.startRecording();
-                    videoRecorder.stream = stream;
-                }
-            <i class="orange">//  Stop Recording </i>
-                async function stopGif() {
-                <i class="orange">// Content upload. </i>
-                    await videoRecorder.stopRecording();
-                    await gifRecorder.stopRecording();
-                    const videoBlob = await videoRecorder.getBlob();
-                    const gifBlob = await gifRecorder.getBlob();
-                <i class="orange">//  Output format. </i>
-                    gifMedia.src = URL.createObjectURL(videoBlob);
-                    videoRecorder.stream.getTracks().forEach(t => t.stop());
-                    gifMedia.srcObject = null;
-                 <i class="orange">//  Reset parameters.</i>
-                    await videoRecorder.reset();
-                    await videoRecorder.destroy();
-                    await gifRecorder.reset();
-                    await gifRecorder.destroy();
-                <i class="orange">//  Content cleaning.</i>
-                    gifSrc = await gifBlob;
-                    gifView.src = URL.createObjectURL(await gifBlob);
-                    gifRecorder = null;
-                    videoRecorder = null;
-                }
-            <i class="orange">//  Upload recording.</i>
-                async function uploadGif() {
-                <i class="orange">//  Starting the upload.</i>
-                    showMsg(3)
-                    const formData = new FormData();
-                    formData.append("file", gifSrc, "api_Gifo.gif");
-                        const params = {
-                            method: "POST",
-                            body: formData,
-                            json: true
-                    };
-                <i class="orange">// 	Query upload URL.</i>
-                    const result = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params);
-                    console.log(await result);
-                    id = result.data.id;
-                    item = result.data;
-                    showMsg(4)
-                    addStorage(id, 'gif_');
-                    gifMedia.classList.toggle('show');
-                    gifView.classList.toggle('show');
+
+                   <i class="orange">//	Recording process. </i>
+                    recAgain.addEventListener( 'click', () => {
+                        phase = 1; setPhase(false)
+                    }	)
+                    gifBtn.addEventListener( 'click', () => {
+                        phase < 4 ? phase++ : phase = 1; setPhase(true)
+                    }	)
+               <i class="orange">//	Check the webcam. </i>
+                    const startGif = async() => {
+                        try{
+                            const stream = await navigator.mediaDevices.getUserMedia({
+                            audio: false, video: { max: 480 }
+                            }	)
+                            gifMedia.srcObject = stream;
+                            await gifMedia.play()
+                            recMsg.classList.toggle('show')
+                        } catch(error){
+                            alert('El dispositivo no está listo \n error:' + error)
+                        }
                     }
-        <i class="orange">//  API query - Gif_Id. </i>
-                const fetchURL = async(url, params = null) => {
-                    const fetchData = await fetch(url, params);
-                    const response = await fetchData.json();
-                    return response     
-                };
+              <i class="orange"> //	Start recording.</i>
+                    const recGif = async() => {
+                        try{
+                            const stream = gifMedia.srcObject;
+                            videoRecorder = new RecordRTCPromisesHandler(stream, {
+                                type: "video",
+                                mimeType: "video/webm; codecs=vp8",
+                                disableLogs: true,
+                                videoBitsPerSecond: 128000,
+                                frameRate: 30,
+                                quality: 10,
+                                width: 480,
+                                hidden: 240
+                            }	)
+                            gifRecorder = new RecordRTCPromisesHandler(stream, {
+                                disableLogs: true,
+                                type: "gif",
+                                frameRate: 1,
+                                quality: 10,
+                                width: 480,
+                                hidden: 240
+                            }	)
+                            await videoRecorder.startRecording()
+                            await gifRecorder.startRecording()
+                            videoRecorder.stream = stream;
+                        }catch(error){
+                            alert('El dispositivo no está listo \n error:' + error)
+                        }
+                    }
+                   <i class="orange">//	Stop Recording </i>
+                    const stopGif = async() => {
+                        try{
+                       <i class="orange">//Content upload. </i>
+                            await videoRecorder.stopRecording()
+                            await gifRecorder.stopRecording()
+                            const videoBlob = await videoRecorder.getBlob()
+                            const gifBlob = await gifRecorder.getBlob()
+                       <i class="orange">//	Output format. </i>
+                            gifMedia.src = URL.createObjectURL(videoBlob)
+                            videoRecorder.stream.getTracks().forEach(t => t.stop())
+                            gifMedia.srcObject = null;
+                       <i class="orange">//	Reset parameters. </i>
+                            await videoRecorder.reset(); await videoRecorder.destroy()
+                            await gifRecorder.reset(); await gifRecorder.destroy()
+                      <i class="orange"> //	Limpieza de contenido</i>
+                            gifSrc = await gifBlob;
+                            gifView.src = URL.createObjectURL(await gifBlob)
+                            gifRecorder = null;	videoRecorder = null
+                        } catch(error){
+                            alert('El dispositivo no está listo \n error:' + error)
+                        }
+                    }
+              <i class="orange"> //	Upload recording.</i>
+                    const uploadGif = async() => {
+                        try{
+                      <i class="orange"> //	Starting the upload.</i>
+                            showPhase(3)
+                            const formData = new FormData()
+                            formData.append("file", gifSrc, "api_Gifo.gif")
+                                const params = { method: "POST", body: formData, json: true }
+                       <i class="orange">//	Query upload URL. </i>
+                            const response = await fetchURL(`${uploadURL}?api_key=${apiKey}`, params)	
+                            showPhase(4)
+                            id = response.data.id; item = response.data
+                            addStorage(id, 'gif_', true)
+                            recMsg.id = id;
+                            gifMedia.classList.toggle('show')
+                            gifView.classList.toggle('show')
+                        }catch(error){
+                            alert('El dispositivo no está listo \n error:' + error) 
+                        }
+                    }
+              <i class="orange"> //	API query - Gif_Id.</i>
+                    const fetchURL = async(url, params = null) => {
+                        const fetchData = await fetch(url, params)
+                        const response = await fetchData.json()	
+                        return response
+                    };        
                 </pre>
             </aside>
         </section>
@@ -428,45 +442,148 @@
                 <label class="button" for="verSaves">Ver más...</label>
                 <input type="checkbox" id="verSaves">
                 <pre class="mostrar">	
-<i class="orange">// 	Saved elements.</i>
-const loadStorage = () =>{
-    favArea.innerHTML = ``; 
-    myGifs.innerHTML = ``;
-    if(localStorage.length != 0){
-        totalGifs = [];
-        totalFavs = [];
-        for ( i = 0; i < localStorage.length; i++ ){  
-                id = localStorage.key(i);
-                item = JSON.parse(localStorage.getItem(id));
-                if (id.includes('gif_')) {
-                    totalGifs.push(id);
-                    myGifs.innerHTML += showGifs(item, 'gif_')
-                }
-                if (id.includes('fav_')){
-                    totalFavs.push(id);
-                    favArea.innerHTML += showGifs(item, 'fav_');
-    }	}	} 	 
-    totalGifs.length == 0 ? noResults(noGifs, 'gifs') : noGifs.innerHTML = ``;
-    totalFavs.length == 0 ? noResults(noFavs, 'favs') : noFavs.innerHTML = ``;
-    
-    likeHit = document.querySelectorAll('.fav');
-    binHit	= document.querySelectorAll('.trash');
-    openHit = document.querySelectorAll('.max');
+                  <i class="orange"> //	Trending elements.</i>
+                    window.addEventListener( 'load', () => { 
+                        localStorage.getItem('mode') == 'false' ? 
+                            modeItem.checked = true : modeItem.checked = false
+                        url = `${trendURL}?api_key=${apiKey}&limit=${limit}&rating=g`
+                        showPhase(1)
+                        fetchAPI(url, trendArea, showGifs)
+                    }	)
+               <i class="orange">//	Saved elements. </i>
+                    const loadStorage = () => {
+                        favArea.innerHTML = ``;	gifArea.innerHTML = ``
+                  <i class="orange"> //	Analisis de Storage</i>
+                        if(localStorage.length != 0){
+                            totalGifs = [];	totalFavs = []
+                            for ( i = 0; i < localStorage.length; i++ ){  
+                                  id = localStorage.key(i); item = JSON.parse(localStorage.getItem(id))
+                                  if (id.includes('gif_')) {
+                                      totalGifs.push(id); gifArea.innerHTML += showGifs(item, 'gif_')
+                                  }
+                                  if (id.includes('fav_')){
+                                      totalFavs.push(id); favArea.innerHTML += showGifs(item, 'fav_')
+                        }	}	} 	 
+                        totalGifs.length == 0 ? noResults(noGifs, 'gifs') : noGifs.innerHTML = ``
+                        totalFavs.length == 0 ? noResults(noFavs, 'favs') : noFavs.innerHTML = ``
+                        for (i = 0; i < totalFavs.length ; i ++){
+                            isFav = totalFavs[i].slice(4)
+                            document.getElementById(isFav) ? document.getElementById(isFav).querySelector('.fav').classList.add('active'): null 
+                        }	userActions()
+                    }
+              <i class="orange"> //	Add item.</i>
+                    const addStorage = async (id, type) => {
+                        const response = await fetchURL(`${idURL}gifs/${id}?api_key=${apiKey}`)
+                        const data = JSON.stringify(response.data)
+                        localStorage.setItem(type + id, data)
+                        loadStorage()
+                    } 
+              <i class="orange"> //	Remove item.</i>
+                    const remStorage = (id) => {
+                        window.localStorage.removeItem( id )
+                        notFav = id.slice(4)
+                        document.getElementById(notFav) ? document.getElementById(notFav).querySelector('.fav').classList.remove('active') : null
+                        loadStorage()
+                    }
+
+<i class="orange">//	Action buttons.</i>
+const userActions = () => {	
+
+<i class="orange">//	Elements query.</i>
+        likeHit = document.querySelectorAll('.fav'); 
+        binHit	= document.querySelectorAll('.trash');
+        linkHit = document.querySelector('.link');
+        downHit = document.querySelectorAll('.download');
+        openHit = document.querySelectorAll('.max');
+
+<i class="orange">//	Add and remove "like".</i>
+        likeHit.forEach( like => like.onclick = () => { 
+            keyNodes(like)
+            box.classList.contains('favorite') ? remStorage(box.id) : like.classList.toggle('active') ?	addStorage(box.id, 'fav_') : remStorage('fav_' + box.id)
+        }	)
+<i class="orange">//	Remove GIF.</i>
+        binHit.forEach( bin => bin.onclick = () => {
+            keyNodes(bin)
+            remStorage(box.id)
+        }	)
+
+<i class="orange">//	GIFs URL.</i>
+        if(linkHit){
+            linkHit.onclick = () => {
+            keyNodes(linkHit)
+            Object.assign( link = document.createElement('a'), { 
+                    href: `${gifURL + box.id}/giphy.gif`, 
+                    target: `_blank` 
+                }	)
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            }
+        }
+
+<i class="orange">//	GIF Download.</i>
+        downHit.forEach( down => down.onclick = () => {
+            keyNodes(down)
+            linkURL = `${box.classList.contains('result') ? box.id : box.id.slice(4)}`
+            url = `${gifURL + linkURL}/giphy.gif`;
+            fetch(url).then(response => response.blob().then( giphy =>{
+                saveURL = URL.createObjectURL(giphy)
+                Object.assign( link = document.createElement('a'), { 
+                    href: saveURL, 
+                    download: `${item ? item.alt : 'mygif'}.gif` 
+                }	)
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            } 	)	)
+        }	)
+
+<i class="orange">//	Open GIF.	</i>
+    openHit.forEach( open  => open.onclick = () => {	
+        keyNodes(open)
+        box.classList.toggle('active')
+        open.classList.toggle('max'); open.classList.toggle('close')
+        prevItem.classList.toggle('selected'); nextItem.classList.toggle('selected')
+    }	)	
+}
+
+<i class="orange">//	Containers.</i>
+const keyNodes = (param) => { 
+    box = param.parentNode.parentNode.parentNode
+    item = param.parentNode.parentNode.parentNode.querySelector('img')
+}
+
+<i class="orange">//	Change view.</i>
+nextItem.addEventListener('click', () => changeItem(nextItem,true))
+prevItem.addEventListener('click', () => changeItem(prevItem,false))
+
+<i class="orange">//	Class exchange.</i>
+const changeItem = (item, type) => {
+
+<i class="orange">//	Action definition and query.</i>
+    (nowItem = document.querySelector('article.active')) ? null : (nowItem = document.querySelector('article.selected')) ? null : (nowItem = document.querySelector('section:last-child article'))
+    firstItem = nowItem.parentNode.firstElementChild; lastItem  = nowItem.parentNode.lastElementChild
+
+<i class="orange">//	Next element.</i>
+    switch(type){
+        case true:
+            nowItem == lastItem ? newItem = firstItem : newItem = nowItem.nextElementSibling;
+        break;
+        case false:
+            nowItem == firstItem ? newItem = lastItem : newItem = nowItem.previousElementSibling;
+        break;
+    }	
+<i class="orange">//	Minimize and maximize.</i>
+    if(item.classList.contains('selected')){
+        nowItem.querySelector('.close').classList.replace('close','max')
+        newItem.querySelector('.max').classList.replace('max','close')
+        nowItem.classList.remove('active')
+        newItem.classList.add('active')
+    } else {
+        nowItem.classList.contains('selected') ? newItem.classList.toggle('selected') : nowItem.classList.toggle('selected')
+        newItem.classList.contains('selected') ? nowItem.classList.remove('selected') : null
     }
-<i class="orange">//	Add item. </i>
-    const addStorage = async (id, type) => {
-        const response = await fetchURL(`${idURL+id}?api_key=${apiKey}`);
-        const data = JSON.stringify(response.data);
-        localStorage.setItem(type + id, data);    
-        type == 'gif_' ? createArea.querySelector('a.link').setAttribute('href', response.data.images.fixed_height_downsampled.url) : null
-        if(box != undefined ){
-            box.parentNode.id != 'results' ? window.location.reload() : null
-       }   } 
-<i class="orange">//    Remove item.    </i> 
-    const remStorage = (id) => {
-        window.localStorage.removeItem( id );
-        box.parentNode.id != 'results' ? window.location.reload() : null
-    }
+}
                 </pre>
             </aside>
         </section>
